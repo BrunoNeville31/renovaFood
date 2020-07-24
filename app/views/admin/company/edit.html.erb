@@ -1,0 +1,268 @@
+<%= form_with(url: admin_company_path, model: @company, method: :patch, local: true) do |f|%>  
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Editando <%= @company.nome %></h4> 
+                     
+                        <div class="form-group">
+                            <label for="useremail">Nome da Empresa</label> 
+                            <%= f.text_field :nome, class: 'form-control'%>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="username">CNPJ</label> 
+                                    <%= f.text_field :cnpj, class: 'form-control'%>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="userpassword">Telefone</label>                                      
+                                    <%= f.text_field :fone, class: 'form-control'%>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <div class="form-group">
+                                    <label for="username">Rua</label> 
+                                    <%= f.text_field :rua, class: 'form-control'%>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="userpassword">Número</label>  
+                                    <%= f.text_field :numero, class: 'form-control'%>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <label for="username">Complemento</label>  
+                                    <%= f.text_field :complemento, class: 'form-control'%>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label for="userpassword">CEP</label>  
+                                    <%= f.text_field :cep, class: 'form-control'%>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <div class="form-group">
+                                    <label for="username">Bairro</label>   
+                                    <%= f.text_field :bairro, class: 'form-control'%>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="userpassword">Cidade</label>  
+                                    <%= f.text_field :cidade, class: 'form-control'%>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                       
+
+                        <div class="mt-4">
+                            <%= f.submit "EDITAR EMPRESA", class: "btn btn-primary btn-block waves-effect waves-light" %>
+                        </div> 
+                    
+            </div>
+        </div>
+    </div>
+
+   
+
+
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Horário de Funcionamento</h4>
+                <br>
+                <div class="col-sm-12 centro">
+                    <label>Domingo</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <%= f.text_field :sunday_open, class: 'form-control', "data-provide" => 'timepicker'%>
+                                
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 centro">
+                            <label> às </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <%= f.text_field :sunday_close, class: 'form-control', "data-provide" => 'timepicker'%>                                
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-12 centro">
+                    <label>Segunda-Feira</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <%= f.text_field :monday_open, class: 'form-control', "data-provide" => 'timepicker'%>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 centro">
+                            <label> às </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <%= f.text_field :monday_close, class: 'form-control', "data-provide" => 'timepicker'%>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-12 centro">
+                    <label>Terça-Feira</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <%= f.text_field :tuesday_open, class: 'form-control', "data-provide" => 'timepicker'%>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 centro">
+                            <label> às </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <%= f.text_field :tuesday_close, class: 'form-control', "data-provide" => 'timepicker'%>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-12 centro">
+                    <label>Quarta-Feira</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <%= f.text_field :wednesday_open, class: 'form-control', "data-provide" => 'timepicker'%>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 centro">
+                            <label> às </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <%= f.text_field :wednesday_close, class: 'form-control', "data-provide" => 'timepicker'%>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>  
+                <div class="col-sm-12 centro">
+                    <label>Quinta-Feira</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <%= f.text_field :thursday_open, class: 'form-control', "data-provide" => 'timepicker'%>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 centro">
+                            <label> às </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <%= f.text_field :thursday_close, class: 'form-control', "data-provide" => 'timepicker'%>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-12 centro">
+                    <label>Sexta-Feira</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <%= f.text_field :friday_open, class: 'form-control', "data-provide" => 'timepicker'%>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 centro">
+                            <label> às </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                 <%= f.text_field :friday_close, class: 'form-control', "data-provide" => 'timepicker'%>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-12 centro">
+                    <label>Sábado</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <%= f.text_field :saturday_open, class: 'form-control', "data-provide" => 'timepicker'%>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 centro">
+                            <label> às </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <%= f.text_field :saturday_close, class: 'form-control', "data-provide" => 'timepicker'%>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%end%>

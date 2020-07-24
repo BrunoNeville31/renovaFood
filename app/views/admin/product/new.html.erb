@@ -1,0 +1,257 @@
+<style>
+    .col-sm-2{
+        max-width: 13%;
+    }
+</style>
+<%= form_with(url: admin_product_index_path, method: :post, local: true) do |form| %>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title centro">Cadastro de Produtos para Cardápio</h4>
+          <br>
+          <div class="row">
+            <div class="col-md-2">
+              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link mb-2 active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Informações</a>
+                <a class="nav-link mb-2" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Composição</a>
+                <a class="nav-link mb-2" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Adicionais</a>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="tab-content text-muted mt-4 mt-md-0" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                  <%= render :partial => 'informacao', locals: { form: form }%>
+                </div>
+                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                  <%= render :partial => 'composicao'%>
+                </div>
+                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                  <%= render :partial => 'adicionais'%>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div>
+        <button type="submit" class="btn btn-primary btn-block w-md">Salvar</button>
+      </div>
+    </div>
+  </div>
+<% end %>
+<!--
+<#% form_with(url: admin_product_index_path, method: :post, local: true) do |form| %>
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Cadastro de Produto</h4>   
+
+                        <div class="row" style="align-self: center;">
+                            <div class="col-sm-3">
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" name="product[ativoProduto]" class="custom-control-input" id="ativoProduto" checked=''>
+                                    <label class="custom-control-label" for="ativoProduto">Ativa</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="formrow-firstname-input">Nome</label>
+                            <input type="text" name="product[nome]" class="form-control">
+                        </div>
+
+                        <div class="row">
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="formrow-email-input">Descrição</label>
+                                    <input type="text" name="product[descricao]" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="formrow-password-input">Categoria</label>
+                                    <select class="form-control" name="product[categoria]">                                        
+                                        <% @categorias.each do |categoria| %>
+                                            <option value="<#%categoria.id%>"><#%categoria.nome%></option>
+                                        <%end%>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label for="formrow-inputCity">Valor</label>
+                                    <input type="text" name="product[valor]" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label for="formrow-inputState">Vl Promocional</label>
+                                    <input type="text" name="product[vl_promocional]" class="form-control">
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-2" style="align-self: center;">
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input" name="product[promocaoAtiva]" id="promocaoAtiva" checked=''>
+                                    <label class="custom-control-label" for="promocaoAtiva">Promoção Ativa</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label for="formrow-inputCity">Estoque Atual</label>
+                                    <input type="number" name="product[estoque]" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label for="formrow-inputState">Estoque Min</label>
+                                    <input type="number" name="product[estoque_min]" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <br>    
+                        <div class="row">
+                            <div class="col-sm-12 canto">
+                                <button type="button" onclick="acompanhamento()" class="btn btn-warning w-md">Acompanhamentos</button>
+                            </div>
+                        </div>         
+                </div>
+            </div>
+            <div id="acompanhamentos">            
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <button type="submit" class="btn btn-primary btn-block w-md">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <br>
+                    <fieldset style="border: 1px solid;padding: 20px;">
+                        <legend style="width: auto"><h4>Dias disponíveis:</h4></legend>
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" name="product[monday]" id="customCheck1" checked="">
+                                <label class="custom-control-label" for="customCheck1">Segunda-Feira</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" name="product[tuesday]" id="customCheck2" checked="">
+                                <label class="custom-control-label" for="customCheck2">Terça-Feira</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" name="product[wednesday]" id="customCheck3" checked="">
+                                <label class="custom-control-label" for="customCheck3">Quarta-Feira</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" name="product[thursday]" id="customCheck4" checked="">
+                                <label class="custom-control-label" for="customCheck4">Quinta-Feira</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" name="product[friday]" id="customCheck5" checked="">
+                                <label class="custom-control-label" for="customCheck5">Sexta-Feira</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" name="product[saturday]" id="customCheck6" checked="">
+                                <label class="custom-control-label" for="customCheck6">Sábado</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" name="product[sunday]" id="customCheck7" checked="">
+                                <label class="custom-control-label" for="customCheck7">Domingo</label>
+                            </div>
+                    </fieldset>
+                    <br>
+                    <div class="custom-file">
+                        <#% form.file_field :avatar_product, class: "custom-file-input", id: "imagem_um" %>
+                        <label class="custom-file-label" for="imagem_um">Imagem 1</label>
+                    </div>                    
+                    <br>
+                    <br>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+<#%end%>
+
+<script>
+function acompanhamento() {
+    card  = Math.floor(Math.random() * 10000000)
+    html  = `<div class='card' id='${card}'>`
+    html +=    "<div class='card-body'>"
+    html +=     "<div class=canto>"
+    html +=             `<button type="button" onclick='apagarCard(${card})' class="btn btn-danger btn-rounded waves-effect waves-light">Eliminar</button>`
+    html +=     "</div>"
+    html +=    "<div class='row'>"
+    html +=        "<div class='col-sm-6'>"
+    html +=            "<label>Descrição da Etapa</label>"
+    html +=            `<input type='text' class='form-control' name='product[descricaoEtapa][${card}][descricao]'/>`
+    html +=        "</div>"
+    html +=        "<div class='col-sm-2'>"
+    html +=            "<label>Limite</label>"
+    html +=            `<input type='number' class='form-control' name='product[descricaoEtapa][${card}][limite]'/>`
+    html +=        "</div>"
+    html +=        "<div class='col-sm-3' style='align-self: end;'>"                           
+    html +=            `<button type='button' class='btn btn-primary waves-effect waves-light' onclick='adicionarProdutoAcompanhamento(${card})'>`
+    html +=                "<i class='bx bx-restaurant font-size-16 align-middle mr-2'></i> Adicionar"
+    html +=            "</button>"
+    html +=        "</div>"
+    html +=    "</div>"
+    html +=    `<div id='adicionarProdutoAcomp${card}'>`
+    html +=    "</div>"
+    html +=   "</div>"
+    html += "</div>"              
+
+    $('#acompanhamentos').append(html);
+}
+
+function apagarCard(card){
+    $(`#${card}`).remove();
+}
+
+
+function adicionarProdutoAcompanhamento(card) {
+    cardProd  = Math.floor(Math.random() * 10000000)
+    var i =  Math.floor(Math.random() * 10000000)
+    var variacaoProdutos =  Math.floor(Math.random() * 10000000)
+    
+    html =    `<div class='row' id='produto${cardProd}' style='margin-top: 8px;'>`
+    html +=        "<div class='col-sm-4'>"
+    html +=            "<label>Adicional</label>"
+    html +=            `<input type='text' class='form-control' name='product[descricaoEtapa][${card}][produto][${variacaoProdutos}][adicional]'>`
+    html +=        "</div>"
+    html +=        "<div class='col-sm-2'>"
+    html +=            "<label>Valor</label>"
+    html +=            `<input type='text' class='form-control' name='product[descricaoEtapa][${card}][produto][${variacaoProdutos}][valor]'/>`
+    html +=        "</div>"
+    html +=        "<div class='custom-control custom-checkbox mb-3' style='align-self: end;'>"
+    html +=            `<input type='checkbox' class='custom-control-input' name='product[descricaoEtapa][${card}][produto][${variacaoProdutos}][valor_padrao]' id='valorPadrao${i}' checked=''>`
+    html +=            `<label class='custom-control-label' for='valorPadrao${i}'>Usar valor Padrão</label>`
+    html +=        "</div>"
+    html +=        "<div class='col-sm-2' style='align-self: end;'>"
+    html +=            `<button type='button' class='btn btn-danger waves-effect waves-light' onclick='apagarProdutoAcompanhamento(${cardProd})'>`
+    html +=                "<i class='bx bx-minus font-size-16 align-middle mr-2'></i>Remover"
+    html +=            "</button>"
+    html +=        "</div>"    
+    html +=    "</div>"
+    
+   
+    $(`#adicionarProdutoAcomp${card}`).append(html);
+}
+
+function apagarProdutoAcompanhamento(card) {
+    $(`#produto${card}`).remove();
+}
+</script>-->

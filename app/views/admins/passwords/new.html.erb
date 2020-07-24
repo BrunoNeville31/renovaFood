@@ -1,0 +1,40 @@
+
+<div class="col-md-8 col-lg-6 col-xl-5">
+    <div class="card overflow-hidden">
+        <div class="bg-soft-primary">
+            <div class="row">                
+                <div class="col-12" style="text-align: center;padding: 20px;background: #b50909;">
+                    <%= image_tag "logo-light.png", :height => 80 %>
+                </div>
+            </div>
+        </div>
+        <div class="card-body pt-0"> 
+            
+            
+            <div class="p-2">
+                <div class="alert alert-warning text-center mb-4" role="alert">
+                    Insira seu e-mail para receber as instruções!
+                </div>
+                <%= form_for(resource, as: resource_name, url: password_path(resource_name, class: "form-horizontal"), html: { method: :post }) do |f| %>
+
+                    <div class="form-group">
+                        <label for="useremail">Email</label>
+                        <input type="email" class="form-control" id="useremail" placeholder="Enter email">
+                    </div>
+
+                    <div class="form-group row mb-0">
+                        <div class="col-12 text-right">
+                            <%= f.submit "Enviar e-mail de instrução", class: "btn btn-primaryCostumized w-md waves-effect waves-light" %>
+                        </div>
+                    </div>
+
+                <%end%>
+            </div>
+
+        </div>
+    </div>
+    <div class="mt-5 text-center">
+        <p>Lembrou a Senha? <a href="/admin" class="font-weight-medium text-danger"> Fazer login</a> </p>        
+    </div>
+
+</div>

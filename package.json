@@ -1,0 +1,12 @@
+{
+  "name": "websoft",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "5.1.1",
+    "venom-bot": "^1.0.9"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.14",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

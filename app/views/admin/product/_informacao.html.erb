@@ -1,0 +1,94 @@
+<div class="row" style="align-self: center;">
+  <div class="col-sm-12">
+    <div class="custom-control custom-checkbox mb-3">
+      <input type="checkbox" name="product[ativoProduto]" class="custom-control-input" id="ativoProduto" checked=''>
+      <label class="custom-control-label" for="ativoProduto">Ativa</label>
+    </div>
+  </div>
+</div>
+<div class="col-sm-12 centro" style="padding: 10px;background: #80808026;margin-left: 10px;">
+  <label>DIAS DISPONÍVEIS</label>
+  <div class="row" style="padding: 20px;">
+    <div class="col-sm-2 custom-checkbox">
+      <input type="checkbox" class="custom-control-input" name="product[monday]" id="customCheck1" checked="">
+      <label class="custom-control-label" for="customCheck1">Segunda-Feira</label>
+    </div>
+    <div class="col-sm-2 custom-checkbox">
+      <input type="checkbox" class="custom-control-input" name="product[tuesday]" id="customCheck2" checked="">
+      <label class="custom-control-label" for="customCheck2">Terça-Feira</label>
+    </div>
+    <div class="col-sm-2 custom-checkbox">
+      <input type="checkbox" class="custom-control-input" name="product[wednesday]" id="customCheck3" checked="">
+      <label class="custom-control-label" for="customCheck3">Quarta-Feira</label>
+    </div>
+    <div class="col-sm-2 custom-checkbox">
+      <input type="checkbox" class="custom-control-input" name="product[thursday]" id="customCheck4" checked="">
+      <label class="custom-control-label" for="customCheck4">Quinta-Feira</label>
+    </div>
+    <div class="col-sm-2 custom-checkbox">
+      <input type="checkbox" class="custom-control-input" name="product[friday]" id="customCheck5" checked="">
+      <label class="custom-control-label" for="customCheck5">Sexta-Feira</label>
+    </div>
+    <div class="col-sm-2 custom-checkbox">
+      <input type="checkbox" class="custom-control-input" name="product[saturday]" id="customCheck6" checked="">
+      <label class="custom-control-label" for="customCheck6">Sábado</label>
+    </div>
+    <div class="col-sm-2 custom-checkbox">
+      <input type="checkbox" class="custom-control-input" name="product[sunday]" id="customCheck7" checked="">
+      <label class="custom-control-label" for="customCheck7">Domingo</label>
+    </div>
+  </div>
+</div>
+<br>
+<div class="form-group">
+  <label for="formrow-firstname-input">Nome</label>
+  <input type="text" name="product[nome]" class="form-control">
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="formrow-email-input">Descrição</label>
+      <input type="text" name="product[descricao]" class="form-control">
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="formrow-password-input">Categoria</label>
+      <select class="form-control" name="product[categoria]">
+        <% @categorias.each do |categoria| %>
+          <option value="<%=categoria.id%>"><%=categoria.nome%></option>
+        <%end%>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-2">
+    <div class="form-group">
+      <label for="formrow-inputCity">Valor</label>
+      <input type="text" name="product[valor]" class="form-control">
+    </div>
+  </div>
+  <div class="col-lg-2">
+    <div class="form-group">
+      <label for="formrow-inputState">Vl Promocional</label>
+      <input type="text" name="product[vl_promocional]" class="form-control">
+    </div>
+  </div>
+  <div class="col-lg-2" style="align-self: center;">
+    <div class="custom-control custom-checkbox mb-3">
+      <input type="checkbox" class="custom-control-input" name="product[promocaoAtiva]" id="promocaoAtiva" checked=''>
+      <label class="custom-control-label" for="promocaoAtiva">Promoção Ativa</label>
+    </div>
+  </div>
+  <div class="col-lg-2">
+    <div class="form-group">
+      <label for="formrow-inputState">Estoque Min</label>
+      <input type="number" name="product[estoque_min]" class="form-control">
+    </div>
+  </div>
+</div>
+<div class="custom-file">
+  <%= form.file_field :avatar_product, class: 'custom-file-input'%>
+  <label class="custom-file-label" for="imagem_um">Imagem do Produto</label>
+</div>

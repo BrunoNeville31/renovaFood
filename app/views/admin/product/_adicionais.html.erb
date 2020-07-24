@@ -1,0 +1,73 @@
+<div class="col-sm-12">
+  <div class="row">
+    <label>Adicionais que ficarão a escolha do cliente</label>
+  </div>
+</div>
+<div class="col-sm-12 canto">
+  <button type="button" class="btn btn-success" onclick="novoAdicional()">Novo Adicional</button>
+</div>
+<div id="adicional" class="col-sm-12">
+  
+</div>
+
+<script>
+function novoAdicional() {
+  card  = Math.floor(Math.random() * 10000000) 
+  product =  Math.floor(Math.random() * 1000000000) 
+    html = `<div id="${product}">`
+    html +=     `<div class="row" id='${card}'>`
+    html +=            `<div class="col-sm-6">`
+    html +=            `<label>Nome do Adicional</label>`
+    html +=            `<input type="text" class="form-control" name="product_adicionais[${card}][acompanhamento]" placeholder="Ex: Tipos de Bordas, Saladas.."/>`
+    html +=            `</div>`
+    html +=            `<div class="col-sm-2">`
+    html +=            `<label>Qtd.</label>`
+    html +=            `<input type="number" name="product_adicionais[${card}][qtd]" class="form-control">`
+    html +=            `</div>`
+    html +=            `<div class="col-sm-1" style="align-self: end;">`
+    html +=                `<button type="button" onclick='adicionaProduto(${product}, ${card})' class="btn btn-info waves-effect waves-light">produtos</button>`
+    html +=            `</div>`
+    html +=            `<div class="col-sm-1" style="align-self: end;">`
+    html +=                `<button type='button' onclick='excluirCard(${product})' class='btn btn-danger waves-effect waves-light'>excluir</button>`
+    html +=            `</div>`
+    html +=         `<br>`
+    html +=        `</div>`
+    html +=     `</div>`
+    
+
+    $('#adicional').append(html);
+}
+</script>
+
+
+<script>
+    function excluirCard(value) {        
+        $(`#${value}`).remove();        
+    }
+</script>
+
+<script>
+    function adicionaProduto(value, prod) {
+        card  = Math.floor(Math.random() * 100000)
+
+        html = `<div class="row" id='${card}'>`
+        html +=     `<div class="col-sm-4">`
+        html +=     `<label>Produto</label>`
+        html +=     `<select name="product_adicionais[${prod}][product_add][${card}][id]" class="form-control">`
+        html +=         `<% @product_simples.each do |simple|%>`
+        html +=             `<option value="<%=simple.id%>"><%= simple.nome%></option>`
+        html +=         `<% end %>`
+        html +=     `</select>`
+        html +=     `</div>`
+        html +=     `<div class="col-sm-2">`
+        html +=     `<label>Valor</label>`
+        html +=     `<input type="number" name="product_adicionais[${prod}][product_add][${card}][valor_add]" class="form-control">`
+        html +=     `</div>`
+        html +=      `<div class="col-sm-2" style="align-self: end;">`
+        html +=       `<button type="button" onclick='excluirCard(${card})' class="btn btn-danger waves-effect waves-light">deletar</button>`
+        html +=      `</div>`
+        html += `</div>`
+        $(`#${value}`).append(html);
+    }
+</script>
+

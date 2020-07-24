@@ -1,0 +1,27 @@
+<%= form_with(url: admin_category_path, model: @categoria, method: :patch, local: true) do |form|%>
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Cadastro de Categoria</h4>
+                <br>
+                <div class="form-group">
+                    <label for="formrow-firstname-input">Nome</label>
+                    <input type="text" name="category[nome]" value="<%=@categoria.nome%>" class="form-control">
+                </div>
+                <br>
+                <br>                
+                <div class="custom-file">                   
+                    <%= form.file_field :avatar_category, class: "custom-file-input" %>
+                    <label class="custom-file-label" for="imagem_dois">Imagem Categoria</label>
+                </div>
+                <br>
+                <br>
+                <br>
+                
+                <div>
+                    <button type="submit" class="btn btn-primary btn-block w-md">Editar</button>
+                </div> 
+            </div>
+        </div>
+    </div>
+<%end%>

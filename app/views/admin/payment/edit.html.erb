@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-lg-7 col-md-9 col-xl-7">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title mb-4">Forma de Pagamento</h4>
+        <%= form_with(url: admin_payment_path, method: :patch, local: true, model: @payment) do |form|%>
+          <div class="row" style="align-self: center;">
+            <div class="col-sm-3">
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" name="payment[status]" class="custom-control-input" id="ativoProduto" <%=@payment.status == true ? 'checked': ''%>>
+                    <label class="custom-control-label" for="ativoProduto">Ativa</label>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="formrow-email-input">Nome</label>
+                <%=form.text_field :nome, class: 'form-control'%>
+              </div>
+            </div>            
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+                <label for="formrow-email-input">Nº Parcelas</label>                
+                <%=form.number_field :num_parcela, class: 'form-control'%>
+              </div>
+            </div>            
+            <div class="col-sm-3" style="align-self: center;">
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" name="payment[parcela]" class="custom-control-input" id="parcelaAtiva" <%=@payment.parcela == true ? 'checked': ''%>>
+                    <label class="custom-control-label" for="parcelaAtiva">Aceita Parcelas</label>
+                </div>
+            </div> 
+            <div class="col-md-7">
+              <div class="form-group">
+                <label for="formrow-password-input">Tipo do Pagamento</label>
+                    <select name="payment[tipo]" class="form-control">
+                        <option value="0" <%=@payment.credito? ? 'selected' : ''%>>Crédito</option>
+                        <option value="1" <%=@payment.debito? ? 'selected' : ''%>>Débito</option>
+                        <option value="2" <%=@payment.avista? ? 'selected' : ''%>>Á vista</option>
+                    </select>
+              </div>
+            </div>         
+          </div>
+          
+          <br>
+          <div>
+            <button type="submit" class="btn btn-primary btn-block w-md">Salvar</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

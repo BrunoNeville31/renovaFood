@@ -1,0 +1,35 @@
+<div class="content-wrap">
+  <div class="list-section">
+    <div class="wrap-list-rc">
+      <div class="heading-page" style="text-align: center">
+        Produtos com Categoria <%= @categoria.nome %>       
+      </div>
+      <%@produtos.each do |produto|%>
+      <div class="lrc-item">
+        <a href="/menu/product/<%=produto.id%>">
+          <div class="lrc-content">
+            <div class="lrc-img">
+              
+              <%=image_tag image_product(produto)%>
+            </div>
+            <div class="lrc-desc">
+              <div class="lrc-title"><%=produto.nome%></div>
+              <div class="lrc-text">
+                <%=produto.descricao%>
+              </div>
+              <div class="lrc-button">
+                <div class="lrcb-left">                  
+                  <span class="lhc hours"><i class="fas fa-clock"></i> 27m</span>
+                  <span class="lhc comment"><i class="fas fa-dollar-sign"></i> 0</span>
+                </div>
+                <div class="lrcb-right">
+                </div>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <%end%>    
+  </div>
+</div>

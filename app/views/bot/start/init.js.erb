@@ -1,0 +1,11 @@
+$('.bs-example-modal-center-whats').modal('show');
+
+setInterval(function(){ 
+   // $('#qrCodeWP').remove();
+
+    html = `<img src='/node/src/qr/<%=$empresa%>-qr.png' alt='Sem conexão' id='qrCodeWP' />`   
+
+    $('#qrCodeWP').attr("src", `http://localhost:3000/node/src/qr/<%=$empresa%>-qr.png`);
+    //console.log(html);
+     
+}, 3000);

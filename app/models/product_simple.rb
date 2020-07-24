@@ -1,0 +1,2 @@
+class ProductSimple < ApplicationRecord
+end

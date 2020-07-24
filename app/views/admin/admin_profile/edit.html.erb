@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+  <div class="col-lg-7 col-md-9 col-xl-7">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title mb-4">Perfil de Admnistrador</h4>
+        <%= form_with(url: admin_admin_profile_path, method: :patch, local: true, model: @admin_profile) do |form|%>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="formrow-email-input">Nome</label>
+                <%=form.text_field :nome, class: 'form-control', value: @admin.admin_profile.nome%>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="formrow-password-input">Sobrenome</label>
+                <%=form.text_field :sobrenome, class: 'form-control', value: @admin.admin_profile.sobrenome%>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="formrow-password-input">Telefone</label>
+                <%=form.text_field :fone, class: 'form-control', value: @admin.admin_profile.fone%>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="formrow-email-input">Email</label>                
+                <%=form.email_field :email, class: 'form-control', value: @admin.email%>
+              </div>
+            </div>
+            <div class="col-md-6" style="margin-top: 27px">
+              <div class="form-group">                
+                <label class="custom-file-label">Imagem Admin</label>
+                <%=form.file_field :avatar_admin, class: "custom-file-input" %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="formrow-password-input">Senha</label>
+                <%=form.password_field :password, class: 'form-control'%>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="formrow-password-input">Confirmação da Senha</label>
+                <%=form.password_field :password_confirmation, class: 'form-control'%>
+              </div>
+            </div>            
+          </div>
+          <br>
+          <div>
+            <button type="submit" class="btn btn-primary btn-block w-md">Salvar</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

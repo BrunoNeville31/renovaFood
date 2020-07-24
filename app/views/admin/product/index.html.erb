@@ -1,0 +1,98 @@
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+          <form action="/admin/product" method="get" id="filtrarConsulta">
+            <div class="row">                
+                <div class="col-sm-2">
+                    <label>Categoria</label>
+                    <select class="form-control" name="categoria">
+                            <option value="">TODOS</option>
+                        <%@categorias.each do |categoria|%>
+                            <option value="<%=categoria.id%>"><%= categoria.nome.upcase %></option>
+                        <%end%>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <label>Status</label>
+                    <select class="form-control" name="status">
+                        <option value="">TODOS</option>
+                        <option value="0">INATIVO</option>
+                        <option value="1">ATIVO</option>
+                    </select>
+                </div>
+                <div class="col-sm-7 canto">                    
+                    <button type="button" class="btn btn-danger waves-effect waves-light w-sm" onclick="buscar()">
+                        <i class="bx bx-search-alt d-block font-size-16"></i> Filtar
+                    </button>
+                </div>
+                <div class="col-sm-1 canto">                    
+                    <%= link_to new_admin_product_path, class: 'btn btn-success waves-effect waves-light w-sm' do%>
+                        <i class="bx bx-plus-medical  d-block font-size-16"></i> Novo
+                    <%end%>
+                </div>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+            <br>
+            <div class="table-responsive">
+                <table class="table table-centered table-nowrap mb-0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Nome</th>                            
+                            <th>Status</th>
+                            <th>Valor</th>
+                            <th>Valor Promocional</th>
+                            <th>Categoria</th>                            
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% @produtos.each do |produto|%>
+                      
+                        <tr>                            
+                            <td><a href="javascript: void(0);" class="text-body font-weight-bold"><%= produto.nome.upcase %></a> </td>
+                            <td><%if produto.status == true %>
+                                    <span class="badge badge-success">Ativo</span>
+                                <%else%>
+                                    <span class="badge badge-danger">Inativo</span>
+                                <%end%>
+                            </td>
+                            <td><%= number_to_currency(produto.valor, :unit => "R$ ")%></td>
+                            <td><%= number_to_currency(produto.valor_promocional, :unit => "R$ ")%> |                                 
+                                <%if produto.promocao_ativa == true %>
+                                    <span class="badge badge-success">Ativo</span>
+                                <%else%>
+                                    <span class="badge badge-danger">Inativo</span>
+                                <%end%>
+                            </td>                            
+                            <td>
+                                <%=produto.category.nome%>
+                            </td>
+                            <td>          
+                                <%=link_to edit_admin_product_path(produto), class: 'btn btn-primary btn-sm btn-rounded waves-effect waves-light' do%>                                
+                                    Editar
+                                <%end%>
+                            </td>
+                        </tr>
+                        
+                      <%end%>
+                    </tbody>
+                </table>                
+            </div>           
+        </div>
+    </div>
+</div>
+<div>
+<%= will_paginate @produtos, list_classes: %w(pagination justify-content-center)%>
+</div>
+
+<script>
+    function buscar() {
+        $("#filtrarConsulta").submit();
+    }
+</script>

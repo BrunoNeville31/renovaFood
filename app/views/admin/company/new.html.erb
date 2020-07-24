@@ -1,0 +1,271 @@
+<%= form_with(url: admin_company_index_path, model: @company, method: :post, local: true) do |f|%>  
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Criando Nova Empresa</h4> 
+                     
+                        <div class="form-group">
+                            <label for="useremail">Nome da Empresa</label>                       
+                            <input type="text" class="form-control" name="admin[nome]"> 
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="username">CNPJ</label>                       
+                                    <input type="text" class="form-control" name="admin[cnpj]">  
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="userpassword">Telefone</label>  
+                                    <input type="text" class="form-control" name="admin[fone]">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <div class="form-group">
+                                    <label for="username">Rua</label>                       
+                                    <input type="text" class="form-control" name="admin[rua]">  
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="userpassword">Número</label>  
+                                    <input type="text" class="form-control" name="admin[numero]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <label for="username">Complemento</label>                       
+                                    <input type="text" class="form-control" name="admin[complemento]">  
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label for="userpassword">CEP</label>  
+                                    <input type="text" class="form-control" name="admin[cep]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <div class="form-group">
+                                    <label for="username">Bairro</label>                       
+                                    <input type="text" class="form-control" name="admin[bairro]">  
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="userpassword">Cidade</label>  
+                                    <input type="text" class="form-control" name="admin[cidade]">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="checkbox" class="" name="admin[termos]"> 
+                            <label for="useremail">Estou de acordos com os Termos & Condições</label>                        
+                        </div>
+
+                        <div class="mt-4">
+                            <%= f.submit "REGISTRAR EMPRESA", class: "btn btn-primary btn-block waves-effect waves-light" %>
+                        </div> 
+                    
+            </div>
+        </div>
+    </div>
+
+   
+
+
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Horário de Funcionamento</h4>
+                <br>
+                <div class="col-sm-12 centro">
+                    <label>Domingo</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input id="timepicker2" type="text" name="admin[sunday_open]" class="form-control" data-provide="timepicker">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 centro">
+                            <label> às </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input id="timepicker2" type="text" name="admin[sunday_close]" class="form-control" data-provide="timepicker">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-12 centro">
+                    <label>Segunda-Feira</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input id="timepicker2" type="text" name="admin[moday_open]" class="form-control" data-provide="timepicker">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 centro">
+                            <label> às </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input id="timepicker2" type="text" name="admin[moday_close]" class="form-control" data-provide="timepicker">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-12 centro">
+                    <label>Terça-Feira</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input id="timepicker2" type="text" name="admin[tuesday_open]" class="form-control" data-provide="timepicker">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 centro">
+                            <label> às </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input id="timepicker2" type="text" name="admin[tuesday_close]" class="form-control" data-provide="timepicker">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-12 centro">
+                    <label>Quarta-Feira</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input id="timepicker2" type="text" name="admin[wednesday_open]" class="form-control" data-provide="timepicker">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 centro">
+                            <label> às </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input id="timepicker2" type="text" name="admin[wednesday_close]" class="form-control" data-provide="timepicker">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>  
+                <div class="col-sm-12 centro">
+                    <label>Quinta-Feira</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input id="timepicker2" type="text" name="admin[thursday_open]" class="form-control" data-provide="timepicker">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 centro">
+                            <label> às </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input id="timepicker2" type="text" name="admin[thursday_close]" class="form-control" data-provide="timepicker">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-12 centro">
+                    <label>Sexta-Feira</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input id="timepicker2" type="text" name="admin[friday_open]" class="form-control" data-provide="timepicker">
+                                
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 centro">
+                            <label> às </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input id="timepicker2" type="text" name="admin[friday_close]" class="form-control" data-provide="timepicker">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-12 centro">
+                    <label>Sábado</label>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input id="timepicker2" type="text" name="admin[saturday_open]" class="form-control" data-provide="timepicker">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 centro">
+                            <label> às </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input id="timepicker2" type="text" name="admin[saturday_close]" class="form-control" data-provide="timepicker">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%end%>

@@ -1,0 +1,2 @@
+module Bot::StartHelper
+end

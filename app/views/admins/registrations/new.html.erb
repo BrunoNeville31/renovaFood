@@ -1,0 +1,128 @@
+<div class="col-md-8 col-lg-6 col-xl-8">
+    <div class="card overflow-hidden">
+        <div class="bg-soft-primary">
+            <div class="row">
+                
+                <div class="col-12" style="text-align: center;padding: 20px;background: #b50909;">
+                    <%= image_tag "logo-light.png", :height => 100 %>
+                </div>
+            </div>
+        </div>
+        <div class="card-body pt-0">           
+            <div class="p-2">
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form-horizontal") do |f| %>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="username">Nome</label>                       
+                                <input type="text" class="form-control" name="admin[nome]">  
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="userpassword">Sobrenome</label>  
+                                <input type="text" class="form-control" name="admin[sobrenome]">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="useremail">Email</label>                       
+                        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>    
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="username">Senha</label>                       
+                                <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %> 
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="userpassword">Confirmação de Senha</label>  
+                                <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="useremail">Nome da Empresa</label>                       
+                        <input type="text" class="form-control" name="admin[empresa_nome]"> 
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="username">CNPJ</label>                       
+                                <input type="text" class="form-control" name="admin[cnpj]">  
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="userpassword">Telefone</label>  
+                                <input type="text" class="form-control" name="admin[telefone]">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <label for="username">Rua</label>                       
+                                <input type="text" class="form-control" name="admin[rua]">  
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="userpassword">Número</label>  
+                                <input type="text" class="form-control" name="admin[numero]">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <label for="username">Complemento</label>                       
+                                <input type="text" class="form-control" name="admin[complemento]">  
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="userpassword">CEP</label>  
+                                <input type="text" class="form-control" name="admin[cep]">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <label for="username">Bairro</label>                       
+                                <input type="text" class="form-control" name="admin[bairro]">  
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="userpassword">Cidade</label>  
+                                <input type="text" class="form-control" name="admin[cidade]">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="checkbox" class="" name="admin[termos]"> 
+                        <label for="useremail">Estou de acordos com os Termos & Condições</label>                        
+                    </div>
+
+                    <div class="mt-4">
+                        <%= f.submit "REGISTRAR EMPRESA", class: "btn btn-primaryCostumized btn-block waves-effect waves-light" %>
+                    </div>                
+
+                    <div class="mt-4 text-center">
+                        
+                    </div>
+                <%end%>
+            </div>
+
+        </div>
+    </div>
+</div>

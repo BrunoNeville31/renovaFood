@@ -1,0 +1,479 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+    
+    <head>
+        
+        <meta charset="utf-8" />
+        <title>Renova Food - Delivery</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Renova Food - Sistema de Delivery" name="description" />
+        <meta content="Bruno Neville" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/logo.png">
+
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>        
+        <link href="/template/admin/temp/assets/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
+        <%= stylesheet_link_tag    'admin'%>    
+        <link href="/template/admin/temp/assets/css/icons.min.css" rel="stylesheet" type="text/css" />   
+        <link href="/template/admin/temp/assets/libs/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css"> 
+
+    </head>
+
+    <body data-topbar="dark" data-layout="horizontal">
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            <header id="page-topbar">
+                <div class="navbar-header">
+                    <div class="d-flex">
+                        <!-- LOGO -->
+                        <div class="navbar-brand-box">
+                            <a href="/admin" class="logo logo-dark">
+                                <span class="logo-sm">
+                                    <%= image_tag "logo.png", :height => 22 %>
+                                </span>
+                                <span class="logo-lg">
+                                    <%= image_tag "logo.png", :height => 50 %>
+                                </span>
+                            </a>
+
+                            <a href="/admin" class="logo logo-light">
+                                <span class="logo-sm">
+                                    <%= image_tag "logo.png", :height => 22 %>
+                                </span>
+                                <span class="logo-lg">
+                                    <%= image_tag "logo.png", :height => 50 %>
+                                </span>
+                            </a>
+                        </div>
+
+                                                                    
+
+                        
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="dropdown d-none d-lg-inline-block ml-1">
+                            <button type="button" class="btn header-item noti-icon waves-effect"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bx bx-customize"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                <div class="px-lg-2">
+                                    <div class="row no-gutters">
+                                        <div class="col">                                            
+                                            <%= link_to bot_init_path, class: 'dropdown-icon-item', remote: true do%>
+                                                <%= image_tag "whatsapp.png", :height => 22 %>
+                                                <span>WhatApp</span>
+                                            <%end%>
+                                        </div>
+                                        <div class="col">
+                                            
+                                        </div>
+                                        <div class="col">
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="row no-gutters">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bx bx-bell bx-tada"></i>
+                                <span class="badge badge-danger badge-pill" id="notificaPedido" style="position: fixed;">3</span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
+                                aria-labelledby="page-header-notifications-dropdown">
+                                <div class="p-3">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h6 class="m-0"> Notificações </h6>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                                <div data-simplebar style="max-height: 230px;">
+                                    <a href="#" class="text-reset notification-item">
+                                        <div class="media">
+                                            <div class="avatar-xs mr-3">
+                                                <span class="avatar-title bg-primary rounded-circle font-size-16">
+                                                    <i class="bx bx-cart"></i>
+                                                </span>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="mt-0 mb-1">Your order is placed</h6>
+                                                <div class="font-size-12 text-muted">
+                                                    <p class="mb-1">If several languages coalesce the grammar</p>
+                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>                                    
+                                </div>
+                                <div class="p-2 border-top">
+                                    <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)">
+                                        <i class="mdi mdi-arrow-right-circle mr-1"></i> Vizualizar todas
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <%if current_admin.admin_profile.avatar_admin.attached?%>
+                                    <%=image_tag current_admin.admin_profile.avatar_admin, class: 'rounded-circle header-profile-user'%>
+                                <% else %>
+                                    <img class="rounded-circle header-profile-user" src="/template/admin/temp/assets/images/users/avatar-1.jpg" alt="Header Avatar">
+                                <% end %>
+                                <span class="d-none d-xl-inline-block ml-1"><%= current_admin.admin_profile.nome%> <%= current_admin.admin_profile.sobrenome%></span>
+                                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <!-- item-->
+                                <a class="dropdown-item" href="/admin/admin_profile/<%= current_admin.id%>/edit"><i class="bx bx-user font-size-16 align-middle mr-1"></i> Perfil</a>  
+                                <a class="dropdown-item" href="/admin/company/<%=$empresa%>/edit"><i class="bx bxs-store font-size-16 align-middle mr-1"></i> Empresa</a>                              
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-danger" href="/admins/sign_out"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Sair</a>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            </header>
+    
+                <div class="topnav">
+                    <div class="container-fluid">
+                        <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
+    
+                            <div class="collapse navbar-collapse" id="topnav-menu-content">
+                                <ul class="navbar-nav">
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/admin" id="topnav-dashboard">
+                                            <i class="bx bx-layout mr-2"></i>Dashboards
+                                        </a>                                        
+                                    </li>
+    
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="bx bx-plus-circle mr-2"></i>Cadastros <div class="arrow-down"></div>
+                                        </a>
+
+                                        <div class="dropdown-menu mega-dropdown-menu px-2 dropdown-mega-menu"
+                                            aria-labelledby="topnav-uielement">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div>
+                                                        <a href="/admin/client" class="dropdown-item">Clientes</a>
+                                                        <a href="/admin/product" class="dropdown-item">Produtos Cardápio</a>
+                                                        <a href="#" class="dropdown-item">Fornecedores</a>
+                                                        <a href="/admin/category" class="dropdown-item">Grupos</a>
+                                                        <a href="/admin/product_simple" class="dropdown-item">Produtos Individuais</a>                                                        
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+
+                                        </div>
+                                    </li>
+    
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="bx bx-dollar mr-2"></i>Financeiro <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-pages">
+
+                                            <a href="#" class="dropdown-item">Contas a Pagar</a>
+                                            <a href="#" class="dropdown-item">Contas a Receber</a>
+                                            <a href="/admin/payment" class="dropdown-item">Formas de Pagamento</a>
+                                            <a href="#" class="dropdown-item" data-toggle="modal" data-target=".center-taxa-entrega">Taxas de Entrega</a>
+                                            <a href="#" class="dropdown-item">Dados Fiscais</a>                                            
+                                        </div>
+                                    </li>
+    
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-components" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="bx bxs-bar-chart-alt-2 mr-2"></i>Relatórios <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-components">
+                                            <div class="dropdown">
+                                                <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-form"
+                                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Clientes <div class="arrow-down"></div>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="topnav-form">
+                                                    <a href="#" class="dropdown-item">Vendas por Cliente</a>
+                                                    <a href="#" class="dropdown-item">Clientes por Empresa</a>
+                                                    <a href="#" class="dropdown-item">Clientes Ativos/Inativos</a>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="dropdown">
+                                                <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-table"
+                                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Produtos <div class="arrow-down"></div>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="topnav-table">
+                                                    <a href="#" class="dropdown-item">Produtos por Empresa</a>
+                                                    <a href="#" class="dropdown-item">Produtos Ativos/Inativos</a>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="dropdown">
+                                                <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-charts"
+                                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Vendas <div class="arrow-down"></div>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="topnav-charts">
+                                                    <a href="#" class="dropdown-item">Vendas por Cliente</a>
+                                                    <a href="#" class="dropdown-item">Vendas por Produto</a>
+                                                    <a href="#" class="dropdown-item">Promoções</a>
+                                                    <a href="#" class="dropdown-item">Vendas nos últimos 7 dias</a>
+                                                    <a href="#" class="dropdown-item">Vendas nos últimos 30 dias</a>                                                    
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                    </li>
+    
+                        
+    
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-more" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="bx bx-file mr-2"></i>Pedidos <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-pages">
+
+                                            <a href="#" class="dropdown-item">Cozinha</a>
+                                            <a href="#" class="dropdown-item">Pedidos</a>
+                                            <a href="#" class="dropdown-item">Avaliações</a>                                                                                      
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-layout" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="bx bxs-store mr-2"></i>PDV <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="topnav-layout">
+                                            <a href="#" class="dropdown-item">Iniciar PDV</a>                                            
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="bx bx-store-alt mr-2"></i>Empresas <div class="arrow-down"></div>
+                                        </a>
+
+                                        <div class="dropdown-menu mega-dropdown-menu px-2 dropdown-mega-menu"
+                                            aria-labelledby="topnav-uielement">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div>
+                                                        <% empresas = Company.where(licenca: current_admin.admin_profile.licenca)%>
+                                                        <%empresas.each do |empresa|%>
+                                                            <%if empresa.id == $empresa 
+                                                                ativo = "active"
+                                                            end%>                                                            
+                                                            <%= link_to "#{empresa.nome.upcase}", admin_company_path(empresa), class: "dropdown-item #{ativo}"%>                                                            
+                                                        <%end%>   
+                                                         <div class="dropdown-divider"></div>
+
+                                                         <%= link_to "NOVO", new_admin_company_path, class: 'dropdown-item'%>                                                                                                                                                              
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+
+                                        </div>
+                                    </li>
+    
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">                        
+
+                        <%= yield%>                        
+
+                    </div>                    
+                </div>
+               
+
+                
+
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12 centro">
+                                <script>document.write(new Date().getFullYear())</script> © Upper Desenvolvimento.
+                            </div>
+                            
+                        </div>
+                    </div>
+                </footer>
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+        <!-- Right Sidebar -->
+        <div class="right-bar">
+            <div data-simplebar class="h-100">
+                <div class="rightbar-title px-3 py-4">
+                    <a href="javascript:void(0);" class="right-bar-toggle float-right">
+                        <i class="mdi mdi-close noti-icon"></i>
+                    </a>
+                    <h5 class="m-0">Settings</h5>
+                </div>
+
+                <!-- Settings -->
+                <hr class="mt-0" />
+                <h6 class="text-center mb-0">Choose Layouts</h6>
+
+                <div class="p-4">
+                    <div class="mb-2">
+                        <img src="/template/admin/temp/assets/images/layouts/layout-1.jpg" class="img-fluid img-thumbnail" alt="">
+                    </div>
+                    <div class="custom-control custom-switch mb-3">
+                        <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
+                        <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
+                    </div>
+    
+                    <div class="mb-2">
+                        <img src="/template/admin/temp/assets/images/layouts/layout-2.jpg" class="img-fluid img-thumbnail" alt="">
+                    </div>
+                    <div class="custom-control custom-switch mb-3">
+                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="/template/admin/temp/assets/css/bootstrap-dark.min.css" data-appStyle="/template/admin/temp/assets/css/app-dark.min.css" />
+                        <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
+                    </div>
+    
+                    <div class="mb-2">
+                        <img src="/template/admin/temp/assets/images/layouts/layout-3.jpg" class="img-fluid img-thumbnail" alt="">
+                    </div>
+                    <div class="custom-control custom-switch mb-5">
+                        <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appStyle="/template/admin/temp/assets/css/app-rtl.min.css" />
+                        <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
+                    </div>
+
+            
+                </div>
+
+            </div> <!-- end slimscroll-menu-->
+        </div>
+        <!-- /Right-bar -->
+
+        
+        <div class="rightbar-overlay"></div>
+
+
+        <!-- Modal Whats-->
+        <% venda_bot_wp = Company.find($empresa)%>
+
+        <div class="col-sm-6 col-md-4 col-xl-3">  
+            <div class="modal fade bs-example-modal-center-whats" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title mt-0">Vendas Por Whats</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="centro" id="imgQR">
+                                 <iframe src="/node/src/qr/<%= $empresa%>-qr.png" alt="Sem conexão" id="qrCodeWP" style="height: 286px;width: 288px;" ></iframe>
+                            </div>  
+                              <%= form_with(url: bot_auth_path)do |form|%>                        
+                                <br>
+                                <div class="custom-control custom-switch mb-3" dir="ltr">
+                                    <%= form.check_box :venda_bot, class: 'custom-control-input', id: 'customSwitchsizesm', checked: venda_bot_wp.venda_bot%>
+                                    <label class="custom-control-label" for="customSwitchsizesm">Ativar vendas por WhatsApp</label>
+                                </div>
+                                <hr>
+                                <%= form.submit "Salvar", class: 'btn btn-primary btn-block'%>
+                              <%end%>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
+
+        <!-- Modal taxa de Entrega -->
+        <div class="col-sm-6 col-md-4 col-xl-3">      
+            <div class="modal fade center-taxa-entrega" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">                        
+                        <div class="modal-body">
+                            <h4 style="text-align: center">Taxa de Entrega(R$ por KM)</h4>
+                            <%=form_with(url: 'taxa_entrega',method: :get) do |form|%>
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label>Taxa de Entrega</label>
+                                            <input type="text" name="taxa_entrega" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="col-sm-12">
+                                    <%= form.submit "SALVAR", class: 'btn btn-primary btn-block'%>
+                                </div>
+                            <%end%>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
+
+
+        <!-- Fim do Modal Whats -->
+        <%= javascript_include_tag 'admin'%>
+
+        <script>
+            
+                //setInterval(() => {
+                //    $.get( "/admin/atualizaStatus", function( data ) {                        
+                //        console.log( "Load was performed." );
+                //    });
+                //}, 10000);
+           
+        </script>
+        
+        <script src="/template/admin/temp/assets/libs/jquery/jquery.min.js"></script>
+        <script src="/template/admin/temp/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/template/admin/temp/assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="/template/admin/temp/assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="/template/admin/temp/assets/libs/node-waves/waves.min.js"></script>
+
+        <!-- apexcharts -->
+        <script src="/template/admin/temp/assets/libs/apexcharts/apexcharts.min.js"></script>
+        <script src="/template/admin/temp/assets/libs/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+        <script src="/template/admin/temp/assets/js/pages/dashboard.init.js"></script>
+        
+
+        <!-- App js -->
+        <script src="/template/admin/temp/assets/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+        <script src="/template/admin/temp/assets/js/pages/form-element.init.js"></script>
+        <script src="/template/admin/temp/assets/js/pages/form-advanced.init.js"></script>
+        <script src="/template/admin/temp/assets/js/app.js"></script> 
+    </body>
+</html>

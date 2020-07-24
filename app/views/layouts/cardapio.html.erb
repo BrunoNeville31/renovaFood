@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>Renova Food - Sistema de Delivery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="Renova Food - Sistema de Delivery" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/templateMob/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/templateMob/css/normalize.css">
+    <link rel="stylesheet" href="/templateMob/css/theme.css">
+    <link rel="stylesheet" href="/templateMob/css/theme/themelibrary.css">
+    <link rel="stylesheet" type="text/css" href="/templateMob/lib/slick/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="/templateMob/lib/slick/slick/slick-theme.css">
+    <link rel="stylesheet" href="/templateMob/lib/Magnific-Popup-master/dist/magnific-popup.css">
+    <link rel="stylesheet" href="/mobile/assets/css/style.css">
+    <script defer src="/templateMob/lib/fontawesome-free-5.10.2-web/js/brands.js"></script>
+    <script defer src="/templateMob/lib/fontawesome-free-5.10.2-web/js/solid.js"></script>
+    <script defer src="/templateMob/lib/fontawesome-free-5.10.2-web/js/fontawesome.js"></script>
+    <style>
+      .theme-button {
+          background-color: #9a0e0e;
+      }
+    </style>
+  </head>
+  <body class="default">
+    <div class="wrapper">
+      <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-header" style="background-color: #9a0e0e;">
+          <div class="container-fluid">
+            <button type="" id="sidebarleftbutton" class="btn">
+              <div class="photo-profile">
+                <style>
+                  .imgFormated {
+                      width: 75px;
+                      height: 50px;
+                      margin-left: -20px;
+                      border-radius: 100%;
+                  }
+                </style>
+                <img src="<%=$cliente.src%>" class="imgFormated" alt="...">
+              </div>
+            </button>
+            <div class="logo"><%= $empresaMenu.nome %></div>
+            <button type="button" id="sidebarrightbutton" class="btn">
+              <i class="fas fa-shopping-basket"></i>
+            </button>
+          </div>
+        </nav>
+        <%= yield%>
+        
+        <div class="footer" style="background-color: #9a0e0e">
+          <div class="footer-heading">Cadápio Admnistrado por</div>
+          <div class="socmed">
+            <%= image_tag "logo.png", :height => 45 %>
+          </div>
+        </div>
+      </div>
+      <div class="overlay"></div>
+      <script src="/templateMob/lib/jquery/jquery-3.4.1.min.js"></script>
+      <script src="/mobile/assets/js/lib/popper.min.js"></script>
+      <script src="/templateMob/lib/bootstrap/js/bootstrap.min.js"></script>
+      <script src="/templateMob/lib/Magnific-Popup-master/dist/jquery.magnific-popup.js"></script>
+      <script src="/templateMob/lib/slick/slick/slick.min.js"></script>
+      <script src="/templateMob/js/theme.js"></script>    
+      <script src="/mobile/assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
+      <script src="/mobile/assets/js/plugins/jquery-circle-progress/circle-progress.min.js"></script>      
+      <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+      
+    </div>
+  </body>
+</html>

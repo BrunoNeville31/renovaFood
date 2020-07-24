@@ -1,0 +1,34 @@
+<div class="col-sm-12">
+  <div class="row">
+    <label>Produtos individuais que compõe um produto de Venda</label>
+  </div>
+</div>
+<div class="col-sm-12 canto">
+  <!--<button type="button" class="btn btn-success" onclick="novaComp()">Nova Composição</button>-->
+</div>
+<div id="composicao" class="col-sm-12">
+    <div class="alert alert-danger" role="alert">
+       Área em desenvolvimento! Em breve Vamos liberar esta parte.
+    </div>
+</div>
+<script>
+  function novaComp() {
+  card  = Math.floor(Math.random() * 10000000)
+
+  html = `<div class="row">`
+  html +=     `<div class="col-sm-6">`
+  html +=     `<label>Produto</label>`
+  html +=     `<select name="product_simple[${card}][id]" class="form-control">`
+  html +=         `<% @product_simples.each do |simple|%>`
+  html +=             `<option value="<%=simple.id%>"><%= simple.nome%></option>`
+  html +=         `<% end %>`
+  html +=     `</select>`
+  html +=     `</div>`
+  html +=     `<div class="col-sm-2">`
+  html +=     `<label>Qtd.</label>`
+  html +=     `<input type="number" name="product_simple[${card}][qtd]" class="form-control">`
+  html +=     `</div>`
+  html += `</div>`
+  $('#composicao').append(html);
+  }
+</script>

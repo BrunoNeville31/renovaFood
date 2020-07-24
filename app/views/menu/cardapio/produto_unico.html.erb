@@ -1,0 +1,110 @@
+<style>
+ .stepper .form-control {    
+    border: 2px solid #9A0E0E;    
+    color: #9A0E0E;
+}
+
+.stepper .stepper-button {   
+    background: #9A0E0E;
+    border: 2px solid #9A0E0E;
+}
+.col-sm-6{
+    width: 25%;
+}
+</style>
+<%= form_with(url: '/menu/armazena_pedido', method: :post, local: true) do |form|%>
+<input type="hidden" name="product_id" value="<%=@produto.id%>"/>
+<div class="content-wrap">
+  <div class="food-page-section">
+    <div class="wrap-food-recipe">
+      <div class="section-single-page">
+        <div class="news-wrap">
+          <h4><%=@produto.nome%></h4>
+          
+          <%=image_tag image_product(@produto)%>
+          <p class="text-justify" >
+            <%=@produto.descricao%>
+          </p>
+          <div class="lrc-button">
+            <div class="lrcb-left">
+              <span class="lhc hours"><i class="fas fa-clock"></i> 27m</span>              
+            </div>
+          </div>
+          <br>
+          <%@acompanhamentoBase.each do |teste|%>  
+
+            <div class="<%=teste.id%>">
+              <div class="row" style="padding: 10px;background-color: #80808036;">
+                <div class="container-fluid">
+                    <div class="sidebarleftbutton" style="float: left;">
+                    <h4><%=teste.descricao%></h4>
+                    </div>
+                    <div class="sidebarrightbutton" style="float: right;">
+                    <h6 id="maxPed<%=teste.id%>">Máx <%=teste.limite%></h6>
+                    </div>
+                </div>
+              </div>
+
+              <div class="">
+                <%SideProductStep.where(product_step_id: teste.id).each do |complemento|%>
+                  <div class="row">
+                    <div class="col-sm-6">                      
+                        <em><%=complemento.nome%></em> 
+                    </div>
+                    <div class="col-sm-6" style="text-align: center">                      
+                        <em id="<%= complemento.id%>">+ R$ <%=complemento.valor%></em> 
+                    </div>
+                    <div class="col-sm-6" style="width: 50%;text-align: end;">
+                      <div class="stepper stepper-sm">
+                             <button class="stepper-button stepper-down"  onclick="subtrair(<%=teste.id%>, <%= complemento.id%>)">-</button>
+                              <input type="text" class="form-control" id="qtdProd<%= complemento.id%>" value="0" disabled />
+                            <button class="stepper-button stepper-up"  onclick="somar(<%=teste.id%>, <%= complemento.id%>)">+</button>
+                        </div> 
+                    </div>
+                  </div>
+                  <br>
+                <%end%>
+              </div>
+            </div>
+          <%end%>
+          <br>
+          
+            </div class="col-sm-12">
+              <div class="row">
+                <div class="col-sm-4">
+                  <label>Valor Final</label>
+                  <h3 id="valorFinal" style="width: 100px;"><%= @produto.promocao_ativa == true ? number_to_currency(@produto.valor_promocional, :unit => 'R$ ') : number_to_currency(@produto.valor, :unit => 'R$ ')%></h3>
+                </div>
+              </div>
+            </div>
+        </div class="col-sm-12">
+          <button type="submit" class="btn btn-danger btn-lg btn-block">Finalizar Compra</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<script>
+    function somar(valor, self) {
+
+        qtdMax = $(`#maxPed${valor}`);
+        qtdMax = parseInt(qtdMax[0]['textContent'].split(' ')[1])        
+        qtd = $(`#qtdProd${self}`)[0]['value'];
+        novoQtd = parseInt(qtd)
+        if(qtdMax > novoQtd){
+
+        soma = novoQtd + 1
+        $(`#qtdProd${self}`).attr('value', soma);
+        }else{
+            console.log('passou');        
+        }        
+    }
+    function subtrair(valor, self) {
+        qtd = $(`#qtdProd${self}`)[0]['value'];
+        
+        novoQtd = parseInt(qtd) - 1
+        
+        $(`#qtdProd${self}`).attr('value', novoQtd);
+    }
+</script>
