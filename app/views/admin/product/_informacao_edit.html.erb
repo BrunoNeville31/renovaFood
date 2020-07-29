@@ -66,13 +66,25 @@
   <div class="col-lg-2">
     <div class="form-group">
       <label for="formrow-inputCity">Valor</label>
-      <input type="text" name="product[valor]" value="<%=number_to_currency(@product.valor, :unit => 'R$ ')%>" class="form-control">
+      <input  id="input-currency-valor" 
+              name="product[valor]"
+              class="form-control input-mask text-left" 
+              value="<%=number_to_currency(@product.valor, :unit => 'R$ ')%>"
+              data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'" 
+              style="text-align: right;" 
+              im-insert="true">
     </div>
   </div>
   <div class="col-lg-2">
     <div class="form-group">
       <label for="formrow-inputState">Vl Promocional</label>
-      <input type="text" name="product[vl_promocional]" value="<%=number_to_currency(@product.valor, :unit => 'R$ ')%>" class="form-control">
+      <input  id="input-currency-valor" 
+              name="product[vl_promocional]"
+              class="form-control input-mask text-left" 
+              value="<%=number_to_currency(@product.valor, :unit => 'R$ ')%>"
+              data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'" 
+              style="text-align: right;" 
+              im-insert="true">
     </div>
   </div>
   <div class="col-lg-2" style="align-self: center;">

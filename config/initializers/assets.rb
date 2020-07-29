@@ -15,4 +15,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
                                                     admin_devise.js admin_devise.scss
                                                     user.js user.scss
                                                     user_devise.js user_devise.scss
-                                                    bot.js.ts)
+                                                    bot.js.ts 
+                                                    cardapio.js menu.css)

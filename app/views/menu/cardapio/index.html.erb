@@ -1,90 +1,72 @@
-<div class="content-wrap">
-  <div class="img-hero">
-    <div>
-      <img src="/templateMob/img/slide3.jpg" alt="slider">
-    </div>
-    <div>
-      <img src="/templateMob/img/slide4.jpg" alt="slider">
-    </div>
-  </div>
-  <div class="section-home you-might-like">
-    <div class="heading-section">
-      <div class="sa-title popcat">Produtos que você vai AMAR...</div>
-      <div class="clear"></div>
-    </div>    
-    
-    <div class="yml-carousel">
-      <% @produtos_novos.each do |produtos_novo|%>
-        <div class="yml-box">
-          <a href="/menu/product/<%=produtos_novo.id%>">
-            <div class="yml-img">
-              <%=image_tag image_product(produtos_novo)%>
-            </div>
-            <div class="yml-food-text"><%=produtos_novo.nome%></div>
-          </a>
-        </div>
-      <%end%>
-    </div>
-  </div>
-  <div class="section-home s-category">
-    <div class="heading-section">
-      <div class="sa-title popcat">Categorias</div>
-      <div class="clear"></div>
-    </div>
-    <div class="home-category-list">
-      <% @categorias.each do |categoria| %>
-        <div class="home-box-category">
-          <a href="#<%=categoria.id%>">
-          <div class="home-text-category">
-            <div class="bc-text"><%= categoria.nome%></div>
-          </div>
-          <div class="home-image-category">            
-            <%=image_tag image_category(categoria)%>
-          </div>
-          </a>
-        </div>
-      <%end%>
-      <div class="clear"></div>
-      <div class=" more-category">
-        <div class="theme-button mcbutton">Ver todas as categorias</div>
-      </div>
-    </div>
-  </div>
-  <div class="section-home home-news">
-    <div class="heading-section">      
-      <div class="clear"></div>
-    </div>
-    <div class="home-news-wrap">
-      <% @categorias.each do |categoria_produtos| %>
-        <div class="news-item" id="<%=categoria_produtos.id%>">
-          <h2 style="text-align: center"><%=categoria_produtos.nome%></h2>
-        </div>
-        <%@produto_categoria = Product.where(company_id: $empresa).where(status: true)%>
-        <%@produto_categoria.each do |produto|%>
-            <div class="news-item">
-              <a href="/menu/product/<%=produto.id%>">
-                <div class="news-content">
-                  <div class="hnw-img">                    
-                    <%=image_tag image_product(produto)%>
-                  </div>
-                  <div class="hnw-desc">
-                    <div class="hnw-title"><%=produto.nome%></div>
-                    <div class="hnw-text">
-                      <%=produto.descricao%>
+<main class="flex-shrink-0 main-container pb-0">
+       
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                
+                
+                <div class="container mb-4">
+                    <div class="swiper-container swiper-offers">
+                        <div class="swiper-wrapper">                            
+                            <div class="swiper-slide w-auto">
+                                <div class="card w-250 position-relative overflow-hidden bg-dark text-white border-0">
+                                    <div class="background">
+                                        <img src="/template/mobile/assets/img/food2.jpg" alt="" s>
+                                    </div>
+                                    <div class="card-body text-center z-1 h-50"></div>
+                                    <div class="card-footer border-0 z-1">
+                                        <div class="media">
+                                            <div class="media-body" style='height: 150px'>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
                     </div>
-                    <div class="lrcb-left">                  
-                      <span class="lhc hours"><i class="fas fa-clock"></i> 27m</span> | 
-                      <span class="lhc comment">                      
-                        <%= produto.promocao_ativa == true ? number_to_currency(produto.valor_promocional, :unit => 'R$ ') : number_to_currency(produto.valor, :unit => 'R$ ')%>
-                      </span>
-                    </div>
-                  </div>
-                  
                 </div>
-              </a>
-            </div>
-        <%end%>
-      <%end%>
-    </div>
-  </div>
-</div>
+                
+                <div class="container">
+                  <% $categorias.each do |categoria| %>
+                    <h6 id="<%=categoria.nome%>" class="page-subtitle" style="text-align: center;"><%= categoria.nome%></h6>
+                    <% produtos = Product.where(category_id: categoria.id).where(status: true) %>
+                    <% produtos.each do |produto| %>
+                    <% if produto.promocao_ativa == true
+                        valor = produto.valor_promocional
+                      else
+                        valor = produto.valor
+                      end%>
+                      <%= link_to "/menu/product/#{produto.id}" do %>
+                      <div class="card  border-0 shadow-light mb-4">
+                          <div class="card-body position-relative">
+                              <div class="row">
+                                  <div class="col-auto w-100px pr-0 align-self-center">
+                                      <div class="h-80 position-relative">
+                                          <div class="background background-h-100">
+                                              <img src="/template/mobile/assets/img/banner1.png" alt="">
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col">
+                                      <p class="mb-1"><%=produto.nome %></p>
+                                      <p class="mb-2 small">                                        
+                                        <span class="text-mute"><%= produto.descricao %></span> 
+                                      </p>
+                                      <div class="row">
+                                          <div class="col text-left">
+                                              <p class="text-success my-0"><%= number_to_currency(valor, :unit => 'R$ ')%></p>
+                                          </div>
+                                          <div class="col-auto"><button class="btn btn-sm btn-link text-default p-0"><i class="material-icons">shopping_basket</i></button></div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <%end%>
+                      <%end%>
+                  <%end%>                    
+                </div>                
+            </div>            
+        </div>
+        
+    </main>

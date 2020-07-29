@@ -58,7 +58,8 @@ class Admin::ProductController < AdminController
     produto.friday = friday
     produto.saturday = saturday
     produto.sunday = sunday
-    
+    debugger
+    x = 1
     respond_to do |format|
       if produto.save!        
         if params[:product_simple].present?
@@ -68,30 +69,29 @@ class Admin::ProductController < AdminController
             composicao.product_simple_id = value[:id]
             composicao.qtd = value[:qtd]
             composicao.save!                                
-          end  
-          if params[:product_adicionais].present?
-            params[:product_adicionais].each do |key, value|
-                adicional = ProductStep.new
-                adicional.descricao = value[:acompanhamento]
-                adicional.product_id = produto.id
-                adicional.company_id = $empresa
-                adicional.limite = value[:qtd]
-                
-                if adicional.save
-                  if value[:product_add].present?
-                    value[:product_add].each do |chave, valor|
-                      adicionalProduto = SideProductStep.new
-                      adicionalProduto.valor = valor[:valor_add]
-                      adicionalProduto.product_simples_id = valor['id'] 
-                      adicionalProduto.product_step_id = adicional.id
-                      adicionalProduto.save!                        
-                    end
+          end
+        end   
+        if params[:product_adicionais].present?
+          params[:product_adicionais].each do |key, value|
+              adicional = ProductStep.new
+              adicional.descricao = value[:acompanhamento]
+              adicional.product_id = produto.id
+              adicional.company_id = $empresa
+              adicional.limite = value[:qtd]
+              
+              if adicional.save
+                if value[:product_add].present?
+                  value[:product_add].each do |chave, valor|
+                    adicionalProduto = SideProductStep.new
+                    adicionalProduto.valor = valor[:valor_add]
+                    adicionalProduto.product_simples_id = valor['id'] 
+                    adicionalProduto.product_step_id = adicional.id
+                    adicionalProduto.save!                        
                   end
                 end
-            end
-          end           
-        end       
-        
+              end
+          end
+        end
         format.html{redirect_to admin_product_index_path, notice: 'Produto cadastrado com Sucesso!'}
       else
         format.html{render new , notice: 'Erro ao cadastrar Produto'}

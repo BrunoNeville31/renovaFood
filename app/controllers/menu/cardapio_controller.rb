@@ -1,14 +1,16 @@
 class Menu::CardapioController < MenuController
     def index
         $empresaMenu = Company.find(params[:id])
+        $categorias = Category.where(company_id: params[:id])
         @categorias = Category.where(company_id: params[:id])
         @produtos_promocao = Product.where(company_id: params[:id]).where(status: true).where(promocao_ativa: true)
+        @produtos_novos = Product.where(company_id: params[:id]).where(status: true)
         $cliente = Client.find(params[:client])
     end
 
     def produto_unico    
         @produto = Product.find(params[:id])
-        @acompanhamentoBase = ProductStep.where(product_id: params[:id])    
+        @acompanhamentoBase = ProductStep.where(product_id: params[:id])  
     end
       
     def grupo    

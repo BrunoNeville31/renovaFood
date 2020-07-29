@@ -65,14 +65,24 @@
 <div class="row">
   <div class="col-lg-2">
     <div class="form-group">
-      <label for="formrow-inputCity">Valor</label>
-      <input type="text" name="product[valor]" class="form-control">
+      <label for="input-currency-valor">Valor</label>
+      <input  id="input-currency-valor" 
+              name="product[valor]"
+              class="form-control input-mask text-left" 
+              data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'" 
+              style="text-align: right;" 
+              im-insert="true">
     </div>
   </div>
   <div class="col-lg-2">
     <div class="form-group">
-      <label for="formrow-inputState">Vl Promocional</label>
-      <input type="text" name="product[vl_promocional]" class="form-control">
+      <label for="input-currency">Vl Promocional</label>     
+      <input  id="input-currency" 
+              name="product[vl_promocional]"
+              class="form-control input-mask text-left" 
+              data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'" 
+              style="text-align: right;" 
+              im-insert="true">
     </div>
   </div>
   <div class="col-lg-2" style="align-self: center;">

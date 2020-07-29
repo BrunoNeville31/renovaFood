@@ -1,110 +1,90 @@
-<style>
- .stepper .form-control {    
-    border: 2px solid #9A0E0E;    
-    color: #9A0E0E;
-}
-
-.stepper .stepper-button {   
-    background: #9A0E0E;
-    border: 2px solid #9A0E0E;
-}
-.col-sm-6{
-    width: 25%;
-}
-</style>
-<%= form_with(url: '/menu/armazena_pedido', method: :post, local: true) do |form|%>
-<input type="hidden" name="product_id" value="<%=@produto.id%>"/>
-<div class="content-wrap">
-  <div class="food-page-section">
-    <div class="wrap-food-recipe">
-      <div class="section-single-page">
-        <div class="news-wrap">
-          <h4><%=@produto.nome%></h4>
-          
-          <%=image_tag image_product(@produto)%>
-          <p class="text-justify" >
-            <%=@produto.descricao%>
-          </p>
-          <div class="lrc-button">
-            <div class="lrcb-left">
-              <span class="lhc hours"><i class="fas fa-clock"></i> 27m</span>              
-            </div>
-          </div>
-          <br>
-          <%@acompanhamentoBase.each do |teste|%>  
-
-            <div class="<%=teste.id%>">
-              <div class="row" style="padding: 10px;background-color: #80808036;">
-                <div class="container-fluid">
-                    <div class="sidebarleftbutton" style="float: left;">
-                    <h4><%=teste.descricao%></h4>
-                    </div>
-                    <div class="sidebarrightbutton" style="float: right;">
-                    <h6 id="maxPed<%=teste.id%>">Máx <%=teste.limite%></h6>
-                    </div>
-                </div>
-              </div>
-
-              <div class="">
-                <%SideProductStep.where(product_step_id: teste.id).each do |complemento|%>
-                  <div class="row">
-                    <div class="col-sm-6">                      
-                        <em><%=complemento.nome%></em> 
-                    </div>
-                    <div class="col-sm-6" style="text-align: center">                      
-                        <em id="<%= complemento.id%>">+ R$ <%=complemento.valor%></em> 
-                    </div>
-                    <div class="col-sm-6" style="width: 50%;text-align: end;">
-                      <div class="stepper stepper-sm">
-                             <button class="stepper-button stepper-down"  onclick="subtrair(<%=teste.id%>, <%= complemento.id%>)">-</button>
-                              <input type="text" class="form-control" id="qtdProd<%= complemento.id%>" value="0" disabled />
-                            <button class="stepper-button stepper-up"  onclick="somar(<%=teste.id%>, <%= complemento.id%>)">+</button>
-                        </div> 
-                    </div>
-                  </div>
-                  <br>
-                <%end%>
-              </div>
-            </div>
-          <%end%>
-          <br>
-          
-            </div class="col-sm-12">
-              <div class="row">
-                <div class="col-sm-4">
-                  <label>Valor Final</label>
-                  <h3 id="valorFinal" style="width: 100px;"><%= @produto.promocao_ativa == true ? number_to_currency(@produto.valor_promocional, :unit => 'R$ ') : number_to_currency(@produto.valor, :unit => 'R$ ')%></h3>
-                </div>
-              </div>
-            </div>
-        </div class="col-sm-12">
-          <button type="submit" class="btn btn-danger btn-lg btn-block">Finalizar Compra</button>
-        </div>
-      </div>
+<main class="flex-shrink-0 main-container pb-0">
+<!-- page content goes here -->
+<div class="container-fluid h-300 position-relative overflow-hidden">
+    <div class="background">
+        <img src="/template/mobile/assets/img/food2.jpg" alt="">
     </div>
-  </div>
 </div>
-<% end %>
+<div class="container mb-4 top-100">
+    <div class="card border-0 shadow-light mb-4">
+        <div class="card-body position-relative">
+            <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
+            <h4 class="text-default"><%= @produto.nome%></h4>            
+             <div class="row mb-4">
+              <% if @produto.promocao_ativa == true
+                      valor = @produto.valor_promocional
+                   else
+                      valor = @produto.valor
+              end%>
+                <div class="col text-left">
+                    <h4 class="text-success"><%= number_to_currency(valor, :unit => 'R$ ')%></h4>    
+                    <p class="mb-1"><%= @produto.descricao%></p>               
+                </div>
+            </div>
+            
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active was-validated " id="details" role="tabpanel" aria-labelledby="details-tab">
+                    <h5 class="subtitle" style="text-align: center;">Adicionais Dísponiveis</h5>
+                    <br>
+                    <% @acompanhamentoBase.each do |base| %>
+                    <div class="row">
+                      <div class="col-sm-6" style="width: 50%;">
+                        <h5 class="subtitle" ><%= base.descricao%></h5>
+                      </div>
+                      <div class="col-sm-6" style="width: 50%;">
+                        <h6><em>Limite de (<%= base.limite %>)</em></h6>
+                      </div>
+                    </div>
+                    <% insumos = SideProductStep.where(product_step_id: base.id) %>
+                    <% insumos.each do |insumo| %>
+                      <div class="container-fluid px-0">
+                          <ul class="list-group list-group-flush mb-4">
+                              <li class="list-group-item">
+                                  <div class="row">
+                                      <div class="col">
+                                      <% nomeProdutoSimples = ProductSimple.find(insumo.product_simples_id)%>
+                                          <h6 class="text-dark mb-1"><%= nomeProdutoSimples.nome %></h6>
+                                          <p class="text-secondary mb-0 small" id="valorInsumo<%=insumo.id%>">+<%= number_to_currency(insumo.valor, :unit => 'R$ ')%></p>
+                                      </div>
+                                      <div class="col-2 pl-0 align-self-center text-right">
+                                          <div class="custom-control custom-switch">
+                                              <input type="checkbox" class="custom-control-input" id="<%=insumo.id%>insumo" onchange="alteraValor(<%=insumo.id%>)">
+                                              <label class="custom-control-label" for="<%=insumo.id%>insumo"></label>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </li>                                                        
+                          </ul>
+                      </div>
+                    <%end%>
+                    <%end%>
+                    <div class="container-fluid" style="background-color: #f94620;color: white;/*! align-items: end; */">
+                      <div class="row">
+                        <div class="col-sm-6" style="width: 50%;">
+                          <h5> Valor Total :</h5>
+                        </div>
+                        <div class="col-sm-6" style="width: 50%;">
+                          <h5 ><em id="valor_final">R$<%= valor %></em></h5>
+                        </div>
+                      </div>                        
+                    </div>
+                    <br>
+                    <div class="container-fluid text-center">
+                        <a href="login.html" class=" btn btn-lg btn-outline-default"> Adicionar</a>
+                    </div>
+
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>    
+<br><br>
+       
+</main>
+
 <script>
-    function somar(valor, self) {
-
-        qtdMax = $(`#maxPed${valor}`);
-        qtdMax = parseInt(qtdMax[0]['textContent'].split(' ')[1])        
-        qtd = $(`#qtdProd${self}`)[0]['value'];
-        novoQtd = parseInt(qtd)
-        if(qtdMax > novoQtd){
-
-        soma = novoQtd + 1
-        $(`#qtdProd${self}`).attr('value', soma);
-        }else{
-            console.log('passou');        
-        }        
-    }
-    function subtrair(valor, self) {
-        qtd = $(`#qtdProd${self}`)[0]['value'];
-        
-        novoQtd = parseInt(qtd) - 1
-        
-        $(`#qtdProd${self}`).attr('value', novoQtd);
+    function alteraValor(valor){
+      console.log(valor);
+      $()
     }
 </script>
