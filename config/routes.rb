@@ -9,7 +9,7 @@ post '/bot/conversation', to: 'bot/start#conversation'
     get '/product/:id', to: 'cardapio#produto_unico'
     get '/group/:id', to: 'cardapio#grupo'
     post '/armazena_pedido', to: 'cardapio#armazena_pedido'
-    get '/finaliza_pedido/:id', to: 'cardapio#finalizar_pedido'    
+    get '/finaliza_pedido', to: 'cardapio#finalizar_pedido'    
   end
 
   namespace :admin do
