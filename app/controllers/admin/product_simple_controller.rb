@@ -19,7 +19,10 @@ class Admin::ProductSimpleController < AdminController
     @product_simple = ProductSimple.new(set_params)
     @product_simple.company_id = $empresa
     @product_simple.status = params[:product_simple][:status].nil? ? false : true
+    debugger
+    x = 1
     respond_to do |format|
+      
       if @product_simple.save
           format.html{redirect_to admin_product_simple_index_path, notice: 'Produto Individual cadastrado com sucesso'}
       else
@@ -42,6 +45,6 @@ class Admin::ProductSimpleController < AdminController
   end
 
   def set_params
-    params.require(:product_simple).permit(:nome, :valor, :estoque_min, :estoque_atual, :status, :company_id)
+    params.require(:product_simple).permit(:nome, :valor_cents, :estoque_min, :estoque_atual, :status, :company_id)
   end
 end

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 post '/bot/auth', to: 'bot/start#auth'
 get '/bot/init', to: 'bot/start#init'
 post '/bot/conversation', to: 'bot/start#conversation'
+root 'admin/dashboard#index'
 
   namespace :menu do
     root 'cardapio#index'

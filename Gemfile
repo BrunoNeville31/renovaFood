@@ -34,6 +34,7 @@ gem 'whenever'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap4'
 gem 'material_icons'
+gem 'money-rails', '~>1.12'
 
 #######
 
