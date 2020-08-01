@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
-    layout :set_devise
-
+    layout :set_devise    
 
     def set_devise        
         if devise_controller?

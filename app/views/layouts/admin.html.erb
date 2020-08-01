@@ -286,9 +286,9 @@
                                                             end%>                                                            
                                                             <%= link_to "#{empresa.nome.upcase}", admin_company_path(empresa), class: "dropdown-item #{ativo}"%>                                                            
                                                         <%end%>   
-                                                         <div class="dropdown-divider"></div>
+                                                         <!--<div class="dropdown-divider"></div> -->
 
-                                                         <%= link_to "NOVO", new_admin_company_path, class: 'dropdown-item'%>                                                                                                                                                              
+                                                         <% link_to "NOVO", new_admin_company_path, class: 'dropdown-item'%>                                                                                                                                                              
                                                     </div>
                                                 </div>                                                
                                             </div>

@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2020_07_22_034724) do
     t.string "taxa"
     t.string "valor"
     t.string "valor_centavos"
+    t.string "dominio"
     t.string "tuesday_open"
     t.string "tuesday_close"
     t.string "wednesday_open"

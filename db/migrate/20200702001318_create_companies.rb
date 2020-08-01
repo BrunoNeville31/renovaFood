@@ -17,6 +17,7 @@ class CreateCompanies < ActiveRecord::Migration[5.2]
       t.string :taxa
       t.string :valor
       t.string :valor_centavos
+      t.string :dominio
      
 
       t.string :moday_open

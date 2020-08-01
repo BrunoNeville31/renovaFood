@@ -63,7 +63,7 @@ class Admin::CompanyController < AdminController
   end
 
   def set_params
-    params.require(:admin).permit(:nome, :rua, :numero, :estado, :cidade, :cep, :bairro, :licenca, :admin_id,
+    params.require(:admin).permit(:nome, :rua, :numero, :estado, :cidade, :cep, :bairro, :licenca, :admin_id, :dominio,
                                     :cnpj, :fone,:status,:data_cobranca,:taxa,:valor,:valor_centavos,:monday_open, 
                                     :monday_close,:tuesday_open,:tuesday_close,:wednesday_open,:wednesday_close,
                                     :thursday_open,:thursday_close,:friday_open,:friday_close,:saturday_open,
@@ -71,7 +71,7 @@ class Admin::CompanyController < AdminController
     
     end
     def set_params_update
-      params.require(:company).permit(:nome, :rua, :numero, :estado, :cidade, :cep, :bairro, :licenca, :admin_id,
+      params.require(:company).permit(:nome, :rua, :numero, :estado, :cidade, :cep, :bairro, :licenca, :admin_id, :dominio,
                                       :cnpj, :fone,:status,:data_cobranca,:taxa,:valor,:valor_centavos,:monday_open, 
                                       :monday_close,:tuesday_open,:tuesday_close,:wednesday_open,:wednesday_close,
                                       :thursday_open,:thursday_close,:friday_open,:friday_close,:saturday_open,

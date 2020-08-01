@@ -58,8 +58,7 @@ class Admin::ProductController < AdminController
     produto.friday = friday
     produto.saturday = saturday
     produto.sunday = sunday
-    debugger
-    x = 1
+    
     respond_to do |format|
       if produto.save!        
         if params[:product_simple].present?
