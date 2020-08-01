@@ -21,17 +21,16 @@
                         </div>                        
 
                         <div class="row">
+                            
                             <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label for="formrow-inputCity">Valor</label>
-                                    <input  id="input-currency-valor" 
-                                            name="product_simple[valor]"
-                                            class="form-control input-mask text-left"                                             
-                                            data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': ''" 
-                                            style="text-align: right;" 
-                                            im-insert="true">
+                                <label for="formrow-inputCity">Valor</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="option-date">R$</span>
+                                    </div>
+                                    <input type="text" name="product_simple[valor]" class="form-control money" value="<%= number_to_currency(@product_simple.valor, :unit => '')%>">
                                 </div>
-                            </div>    
+                            </div>
                             
                             <div class="col-lg-2">
                                 <div class="form-group">

@@ -63,28 +63,29 @@
   </div>
 </div>
 <div class="row">
+  
   <div class="col-lg-2">
-    <div class="form-group">
       <label for="input-currency-valor">Valor</label>
-      <input  id="input-currency-valor" 
-              name="product[valor]"
-              class="form-control input-mask text-left" 
-              data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'" 
-              style="text-align: right;" 
-              im-insert="true">
-    </div>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="option-date">R$</span>
+          </div>
+          <input type="text" name="product[valor]" id="input-currency-valor" class="form-control money">
+      </div>
   </div>
+
+
   <div class="col-lg-2">
-    <div class="form-group">
-      <label for="input-currency">Vl Promocional</label>     
-      <input  id="input-currency" 
-              name="product[vl_promocional]"
-              class="form-control input-mask text-left" 
-              data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'" 
-              style="text-align: right;" 
-              im-insert="true">
-    </div>
+      <label for="input-currency">Vl Promocional</label>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="option-date">R$</span>
+          </div>
+          <input type="text" name="product[vl_promocional]" id="input-currency" class="form-control money">
+      </div>
   </div>
+
+
   <div class="col-lg-2" style="align-self: center;">
     <div class="custom-control custom-checkbox mb-3">
       <input type="checkbox" class="custom-control-input" name="product[promocaoAtiva]" id="promocaoAtiva" checked=''>
@@ -93,8 +94,8 @@
   </div>
   <div class="col-lg-2">
     <div class="form-group">
-      <label for="formrow-inputState">Estoque Min</label>
-      <input type="number" name="product[estoque_min]" class="form-control">
+      <label for="formrow-inputState">Tempo de Preparo(min)</label>
+      <input type="number" name="product[tempo_preparo]" class="form-control">
     </div>
   </div>
 </div>

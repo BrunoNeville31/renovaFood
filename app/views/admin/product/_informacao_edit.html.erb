@@ -63,30 +63,28 @@
   </div>
 </div>
 <div class="row">
+
   <div class="col-lg-2">
-    <div class="form-group">
-      <label for="formrow-inputCity">Valor</label>
-      <input  id="input-currency-valor" 
-              name="product[valor]"
-              class="form-control input-mask text-left" 
-              value="<%=number_to_currency(@product.valor, :unit => 'R$ ')%>"
-              data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'" 
-              style="text-align: right;" 
-              im-insert="true">
+    <label for="formrow-inputValor">Valor</label>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="option-date">R$</span>
+        </div>
+        <input type="text" name="product[valor]" class="form-control money" value="<%=number_to_currency(@product.valor, :unit => '')%>">
     </div>
   </div>
+
+
   <div class="col-lg-2">
-    <div class="form-group">
-      <label for="formrow-inputState">Vl Promocional</label>
-      <input  id="input-currency-valor" 
-              name="product[vl_promocional]"
-              class="form-control input-mask text-left" 
-              value="<%=number_to_currency(@product.valor, :unit => 'R$ ')%>"
-              data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'" 
-              style="text-align: right;" 
-              im-insert="true">
+    <label for="formrow-inputCity">Vl Promocional</label>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="option-date">R$</span>
+        </div>
+        <input type="text" name="product[vl_promocional]" class="form-control money" value="<%=number_to_currency(@product.valor_promocional, :unit => '')%>">
     </div>
   </div>
+
   <div class="col-lg-2" style="align-self: center;">
     <div class="custom-control custom-checkbox mb-3">
       <input type="checkbox" class="custom-control-input" name="product[promocaoAtiva]" id="promocaoAtiva" <%= @product.promocao_ativa == true ? 'checked' : ''%>>
@@ -95,8 +93,8 @@
   </div>
   <div class="col-lg-2">
     <div class="form-group">
-      <label for="formrow-inputState">Estoque Min</label>
-      <input type="number" name="product[estoque_min]" value="<%=@product.estoque_min%>" class="form-control">
+      <label for="formrow-inputState">Tempo de Preparo(min)</label>
+      <input type="number" name="product[tempo_preparo]" value="<%=@product.tempo_preparo%>" class="form-control">
     </div>
   </div>
 </div>

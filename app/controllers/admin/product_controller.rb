@@ -43,12 +43,12 @@ class Admin::ProductController < AdminController
     produto = Product.new
     produto.nome = params[:product][:nome]
     produto.descricao = params[:product][:descricao]
-    produto.valor = params[:product][:valor]
-    produto.valor_promocional = params[:product][:vl_promocional]
+    produto.valor = params[:product][:valor].gsub(',','.').to_f
+    produto.valor_promocional = params[:product][:vl_promocional].gsub(',','.').to_f
     produto.promocao_ativa = promocaoAtiva
     produto.category_id = params[:product][:categoria]       
     produto.avatar_product = params[:avatar_product]
-    produto.estoque_min = params[:product][:estoque_min]
+    produto.tempo_preparo = params[:product][:tempo_preparo]
     produto.company_id = $empresa
     produto.status = produtoAtivo
     produto.monday = monday
@@ -119,17 +119,17 @@ class Admin::ProductController < AdminController
     thursday  =   params[:product][:thursday].nil? ? false : true
     friday    =   params[:product][:friday].nil? ? false : true
     saturday  =   params[:product][:saturday].nil? ? false : true
-    sunday    =   params[:product][:sunday].nil? ? false : true    
+    sunday    =   params[:product][:sunday].nil? ? false : true   
 
     
     @product.nome = params[:product][:nome]
     @product.descricao = params[:product][:descricao]
-    @product.valor = params[:product][:valor]
-    @product.valor_promocional = params[:product][:vl_promocional]
+    @product.valor = params[:product][:valor].gsub(',','.').to_f
+    @product.valor_promocional = params[:product][:vl_promocional].gsub(',','.').to_f
     @product.promocao_ativa = promocaoAtiva
     @product.category_id = params[:product][:categoria]       
     @product.avatar_product = params[:avatar_product]
-    @product.estoque_min = params[:product][:estoque_min]
+    @product.tempo_preparo = params[:product][:tempo_preparo]
     @product.company_id = $empresa
     @product.status = produtoAtivo
     @product.monday = monday

@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :company
-  belongs_to :category
+  belongs_to :category, optional: true
   has_one_attached :avatar_product
 
  # monetize :valor_cents

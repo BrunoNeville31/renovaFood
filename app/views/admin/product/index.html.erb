@@ -71,7 +71,11 @@
                                 <%end%>
                             </td>                            
                             <td>
-                                <%=produto.category.nome%>
+                                <% if produto.category.present? %>
+                                    <%=produto.category.nome%>
+                                <%else%>
+                                    Sem categoria
+                                <%end%>
                             </td>
                             <td>          
                                 <%=link_to edit_admin_product_path(produto), class: 'btn btn-primary btn-sm btn-rounded waves-effect waves-light' do%>                                

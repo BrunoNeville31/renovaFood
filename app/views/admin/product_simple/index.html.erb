@@ -46,13 +46,14 @@
                       
                         <tr>                            
                             <td><a href="javascript: void(0);" class="text-body font-weight-bold"><%= produto.nome.upcase %></a> </td>
+                            
                             <td><%if produto.status == true %>
                                     <span class="badge badge-success">Ativo</span>
                                 <%else%>
                                     <span class="badge badge-danger">Inativo</span>
                                 <%end%>
                             </td>                                                    
-                            
+                            <td><%= number_to_currency(produto.valor, :unit => 'R$ ') %> </td>
                             <td>          
                                 <%=link_to edit_admin_product_simple_path(produto), class: 'btn btn-primary btn-sm btn-rounded waves-effect waves-light' do%>                                
                                     Editar
