@@ -3,8 +3,8 @@ class CreateProducts < ActiveRecord::Migration[5.2]
     create_table :products do |t|
       t.string :nome
       t.string :descricao
-      t.integer :valor_cents
-      t.integer :valor_promocional_cents
+      t.decimal :valor, precision: 5, scale: 2, null: false, default: 0
+      t.decimal :valor_promocional, precision: 5, scale: 2, null: false, default: 0
       t.boolean :promocao_ativa, default: false
       t.string :img_1
       t.string :img_2

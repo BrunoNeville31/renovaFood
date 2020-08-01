@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 2020_07_22_034724) do
 
   create_table "product_simples", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nome"
-    t.integer "valor_cents"
+    t.decimal "valor", precision: 5, scale: 2, default: "0.0", null: false
     t.integer "estoque_min"
     t.integer "estoque_atual"
     t.datetime "created_at", null: false
@@ -179,8 +179,8 @@ ActiveRecord::Schema.define(version: 2020_07_22_034724) do
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nome"
     t.string "descricao"
-    t.integer "valor_cents"
-    t.integer "valor_promocional_cents"
+    t.decimal "valor", precision: 5, scale: 2, default: "0.0", null: false
+    t.decimal "valor_promocional", precision: 5, scale: 2, default: "0.0", null: false
     t.boolean "promocao_ativa", default: false
     t.string "img_1"
     t.string "img_2"

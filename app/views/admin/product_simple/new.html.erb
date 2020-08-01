@@ -16,22 +16,22 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="formrow-firstname-input">Nome</label>
+                            <label for="formrow-firstname-input ">Nome</label>
                             <input type="text" name="product_simple[nome]" class="form-control">
                         </div>                        
 
                         <div class="row">
+
                             <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label for="formrow-inputCity">Valor</label>
-                                    <input  id="input-currency-valor" 
-                                            name="product_simple[valor_cents]"
-                                            class="form-control input-mask text-left"                                             
-                                            data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': ''" 
-                                            style="text-align: right;" 
-                                            im-insert="true">
+                            <label for="formrow-inputCity">Valor</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="option-date">R$</span>
+                                    </div>
+                                    <input type="text" name="product_simple[valor]" class="form-control money"  aria-describedby="option-date">
                                 </div>
-                            </div>    
+                            </div>
+
                             
                             <div class="col-lg-2">
                                 <div class="form-group">

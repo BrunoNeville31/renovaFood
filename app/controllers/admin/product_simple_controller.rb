@@ -45,6 +45,6 @@ class Admin::ProductSimpleController < AdminController
   end
 
   def set_params
-    params.require(:product_simple).permit(:nome, :valor_cents, :estoque_min, :estoque_atual, :status, :company_id)
+    params.require(:product_simple).permit(:nome, :valor, :estoque_min, :estoque_atual, :status, :company_id)
   end
 end
