@@ -82,7 +82,7 @@ class Admin::ProductController < AdminController
                 if value[:product_add].present?
                   value[:product_add].each do |chave, valor|
                     adicionalProduto = SideProductStep.new
-                    adicionalProduto.valor = valor[:valor_add]
+                    adicionalProduto.valor = valor[:valor_add].gsub(',','.').to_f
                     adicionalProduto.product_simples_id = valor['id'] 
                     adicionalProduto.product_step_id = adicional.id
                     adicionalProduto.save!                        
@@ -126,8 +126,10 @@ class Admin::ProductController < AdminController
     @product.valor = params[:product][:valor].gsub(',','.').to_f
     @product.valor_promocional = params[:product][:vl_promocional].gsub(',','.').to_f
     @product.promocao_ativa = promocaoAtiva
-    @product.category_id = params[:product][:categoria]       
-    @product.avatar_product = params[:avatar_product]
+    @product.category_id = params[:product][:categoria] 
+    if  params[:avatar_product].present?       
+      @product.avatar_product = params[:avatar_product]
+    end
     @product.tempo_preparo = params[:product][:tempo_preparo]
     @product.company_id = $empresa
     @product.status = produtoAtivo

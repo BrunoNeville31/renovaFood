@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="RenovaFood - Sistema de Delivery">
+    <meta name="author" content="Bruno Neville">
+
+    <title>RenovaFood - Sistema de Delivery</title>
+   
+    <%= stylesheet_link_tag    'menu'%> 
+    
+    <link href="/template/mobile/assets/vendor/swiper/css/swiper.min.css" rel="stylesheet">
+    <link href="/template/mobile/assets/css/style-red.css" rel="stylesheet" id="style">
+    <style type="text/css">
+        a:link{
+        text-decoration:none;
+        color: black;
+        }
+    </style>
+</head>
+
+<body class="ui-rounded">   
+
+    <!-- Fixed navbar -->
+    <header class="header fixed-top">
+        <nav class="navbar">            
+            <div>               
+                <div class="logo"><h5><%= $empresaMenu.nome%></h5></div>
+                <h6 class="logo-text"><small><%= $cliente.nome%></small></h6>               
+            </div>
+            <div>  
+                <span class="avatar avatar-40"><img src="<%=$cliente.src%>" alt=""></span>
+            </div>            
+        
+        <div class="container-fluid py-2 mb-4" >
+          <div class="swiper-container swiper-categories text-center">
+              <div class="swiper-wrapper">
+                <% $categorias.each_with_index do |categoria, index| %>
+                  <div class="swiper-slide w-auto p-2">
+                      <a href="/menu/?id=<%= $empresaMenu.id%>&client=<%= $cliente.id%>#<%= categoria.nome%>" onclick="formataMenu(<%=categoria.id%>)">                       
+                          <p class="<%= index == 0 ? 'ativo' : ''%>" id="<%=categoria.id%>" style="font-family: italic;"><%=categoria.nome%></p> 
+                      </a>                               
+                  </div>
+                <%end%>                            
+              </div>
+          </div>
+        </div>
+        </nav>
+    </header>  
+            <%= yield %>
+    
+    <div class="footer-tabs border-top text-center">
+        <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                    <i class="material-icons">home</i>
+                    <small class="sr-only">Home</small>
+                </a>
+            </li>            
+            <li class="nav-item centerlarge">
+                <a class="nav-link bg-default" id="cart-tab" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">
+                    <i class="material-icons">shopping_basket</i>
+                    <small class="sr-only">chat</small>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="false">
+                    <i class="material-icons">star</i>
+                    <small class="sr-only">Best</small>
+                </a>
+            </li>
+            
+        </ul>
+    </div>    
+
+    
+    <% javascript_include_tag 'cardapio'%>
+    
+    <script src="/template/mobile/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/template/mobile/assets/js/popper.min.js"></script>
+    <script src="/template/mobile/assets/vendor/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+    <script src="/template/mobile/assets/vendor/swiper/js/swiper.min.js"></script>
+    <script src="/template/mobile/assets/js/main.js"></script>
+
+    <script>
+        "use strict"
+        $(document).ready(function() {
+            /* Swiper slider */
+            var swiper = new Swiper('.swiper-categories', {
+                slidesPerView: 'auto',
+                spaceBetween: 0,
+                pagination: false,
+            });
+            var swiper = new Swiper('.swiper-offers', {
+                slidesPerView: 'auto',
+                spaceBetween: 20,
+                pagination: false,
+            });
+
+            
+
+            /* toast message */
+            setTimeout(function() {
+                $('.toast').toast('show')
+            }, 2000);
+
+            /* increasenumber */
+            $('.add').on('click', function() {
+                var current = parseInt($(this).closest('.increasenumber').find('input').val());
+                $(this).closest('.increasenumber').find('input').val(current + 1);
+            });
+            $('.remove').on('click', function() {
+                if ($(this).closest('.increasenumber').find('input').val() > 0) {
+                    var current = parseInt($(this).closest('.increasenumber').find('input').val());
+                    $(this).closest('.increasenumber').find('input').val(current - 1);
+                }
+            });
+
+        });
+
+
+        function formataMenu(menu){
+          
+          if($("#" + menu)[0]['className'] == 'ativo'){
+
+          }else{
+            $('.ativo').attr('style','color: #444444;font-family: italic;');
+            $('.ativo').attr('class','');
+
+            $(`#${menu}`).attr('style', 'color: red;font-family: italic;')
+            $(`#${menu}`).attr('class','ativo');
+          }        
+         
+        }
+
+    </script>
+</body>
+
+</html>

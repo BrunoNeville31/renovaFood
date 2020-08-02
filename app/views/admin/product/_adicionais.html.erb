@@ -46,6 +46,7 @@ function novoAdicional() {
     }
 </script>
 
+
 <script>
     function adicionaProduto(value, prod) {
         card  = Math.floor(Math.random() * 100000)
@@ -61,13 +62,15 @@ function novoAdicional() {
         html +=     `</div>`
         html +=     `<div class="col-sm-2">`
         html +=     `<label>Valor</label>`
-        html +=     `<input type="number" name="product_adicionais[${prod}][product_add][${card}][valor_add]" class="form-control">`
+        html +=     `<input type="text" name="product_adicionais[${prod}][product_add][${card}][valor_add]" class="form-control money"/>`
         html +=     `</div>`
         html +=      `<div class="col-sm-2" style="align-self: end;">`
         html +=       `<button type="button" onclick='excluirCard(${card})' class="btn btn-danger waves-effect waves-light">deletar</button>`
         html +=      `</div>`
         html += `</div>`
         $(`#${value}`).append(html);
+
+        $('.money').mask('#.##0,00', {reverse: true});
     }
 </script>
 

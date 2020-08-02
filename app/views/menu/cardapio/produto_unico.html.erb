@@ -1,93 +1,137 @@
-<%= form_with(url: '/menu/armazena_pedido', method: :post, local: true) do |form|%>
-  <main class="flex-shrink-0 main-container pb-0">
-  <!-- page content goes here -->
-  <div class="container-fluid h-300 position-relative overflow-hidden">
-      <div class="background">
-          <img src="/template/mobile/assets/img/food2.jpg" alt="">
-      </div>
-  </div>
-  <div class="container mb-4 top-100">
-      <div class="card border-0 shadow-light mb-4">
-          <div class="card-body position-relative">
-              <div class="top-right mt-2"><button class="btn btn-link text-danger p-0"><i class="material-icons text-danger vm">favorite</i></button></div>
-              <h4 class="text-default"><%= @produto.nome%></h4>            
-              <div class="row mb-4">
-                <% if @produto.promocao_ativa == true
-                        valor = @produto.valor_promocional
-                    else
-                        valor = @produto.valor
-                end%>
-                  <div class="col text-left">
-                      <h4 class="text-success"><%= number_to_currency(valor, :unit => 'R$ ')%></h4>    
-                      <p class="mb-1"><%= @produto.descricao%></p>               
-                  </div>
-              </div>
-              
-              <div class="tab-content" id="myTabContent">
-                  <div class="tab-pane fade show active was-validated " id="details" role="tabpanel" aria-labelledby="details-tab">
-                      <h5 class="subtitle" style="text-align: center;">Adicionais Dísponiveis</h5>
-                      <br>
-                      <% @acompanhamentoBase.each do |base| %>
-                      <div class="row">
-                        <div class="col-sm-6" style="width: 50%;">
-                          <h5 class="subtitle" ><%= base.descricao%></h5>
-                        </div>
-                        <div class="col-sm-6" style="width: 50%;">
-                          <h6><em>Limite de (<%= base.limite %>)</em></h6>
-                        </div>
-                      </div>
-                      <% insumos = SideProductStep.where(product_step_id: base.id) %>
-                      <% insumos.each do |insumo| %>
-                        <div class="container-fluid px-0">
-                            <ul class="list-group list-group-flush mb-4">
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col">
-                                        <% nomeProdutoSimples = ProductSimple.find(insumo.product_simples_id)%>
-                                            <h6 class="text-dark mb-1"><%= nomeProdutoSimples.nome %></h6>
-                                            <p class="text-secondary mb-0 small" id="valorInsumo<%=insumo.id%>">+<%= number_to_currency(insumo.valor, :unit => 'R$ ')%></p>
-                                        </div>
-                                        <div class="col-2 pl-0 align-self-center text-right">
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="<%=insumo.id%>insumo" onchange="alteraValor(<%=insumo.id%>)">
-                                                <label class="custom-control-label" for="<%=insumo.id%>insumo"></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>                                                        
-                            </ul>
-                        </div>
-                      <%end%>
-                      <%end%>
-                      <div class="container-fluid" style="background-color: #f94620;color: white;/*! align-items: end; */">
-                        <div class="row">
-                          <div class="col-sm-6" style="width: 50%;">
-                            <h5> Valor Total :</h5>
-                          </div>
-                          <div class="col-sm-6" style="width: 50%;">
-                            <h5 ><em id="valor_final">R$<%= valor %></em></h5>
-                          </div>
-                        </div>                        
-                      </div>
-                      <br>
-                      <div class="container-fluid text-center">                          
-                          <%= form.submit "Adicionar", class: 'btn btn-lg btn-outline-default' %>
-                      </div>
+<style>
+  .margem-esq{
+    margin-left: 15px;
+  }
+</style>
+<section class="restaurant-detailed-banner">
+    <!-- Foto de Fundo -->
+    <div class="text-center">
+    <img class="img-fluid cover" src="https://askbootstrap.com/preview/osahan-eat/img/mall-dedicated-banner.png">
+    </div>
+</section>
 
-                  </div>                
-              </div>
-          </div>
-      </div>
-  </div>    
-  <br><br>
-        
-  </main>
+<%= form_with(url: '/menu/armazena_pedido', method: :post, local: true) do |form|%>  
+
+  <section class="offer-dedicated-body pt-2 pb-2 mt-4 mb-4">
+    <h2 class="margem-esq" ><%= @produto.nome%></h2>  
+    <p class="mb-1 margem-esq"><%= @produto.descricao%></p>  
+  </section>
+
+    <% @acompanhamentoBase.each do |base|%>
+        <div class="row " style="width: 100%;">
+          <h5 class="mb-4 mt-3 col-md-12 margem-esq"><%= base.descricao%> <small class="h6 text-black-50" id="limiteBase<%=base.id%>"><%= base.limite %> ITEMS</small></h5>
+              <%adicionais = SideProductStep.where(product_step_id: base.id)%>
+              <%adicionais.each do |adicional| %>
+                <div class="col-md-12">
+                  <div class="bg-white rounded border shadow-sm mb-4">
+                      <div class="gold-members p-3 border-bottom">
+                        <span class="count-number float-right">
+                            <button type="button" class="btn btn-outline-secondary  btn-sm left dec" onclick="removeItem(<%= adicional.id%>, <%= base.id%>)"> 
+                                <i class="icofont-minus"></i> 
+                            </button>
+                              <input class="count-number-input  base<%= base.id%>" type="text" name="adicional[<%= base.id %>][<%= adicional.id%>]" id="qtdAdicional<%= adicional.id%>" value="0" readonly="">
+                            <button type="button" class="btn btn-outline-secondary btn-sm right inc basebutton<%= base.id%>" onclick="adicionaItem(<%= adicional.id%>, <%= base.id%>)"> 
+                                <i class="icofont-plus"></i> 
+                            </button>
+                        </span>
+                        <% 
+                          nome = ProductSimple.find(adicional.product_simples_id).nome
+                        %>
+                        <div class="media">
+                          <div class="media-body">
+                              <h6 class="mb-1"><%= nome %></h6>
+                              <p class="text-gray mb-0"><%= number_to_currency(adicional.valor, :unit => 'R$ ', :separator => ',')%></p>
+                          </div>
+                        </div>
+                      </div> 
+                    </div>
+                </div>
+              <%end%>            
+        </div>
+  <%end%>
+
+
+  <%
+    if @produto.promocao_ativa == true
+        valor = @produto.valor_promocional
+        info = 'success'
+        promocao = '@Produto promocional'                                        
+    else
+        valor = @produto.valor
+    end
+  %>
+
+  <section class="" style="background-color: #68636336;position: fixed;bottom: 15px;width: 100%;">
+  <div class="row">
+    <div class="col-sm-6" style="width: 40%;">
+      <h3 class="margem-esq">Valor Total</h3>  
+    </div>
+    <div class="col-sm-6" style="width: 60%;">
+      <button type="button" class="btn btn-block btn-dark">R$<span id="valor_final"><%= number_to_currency(valor, :unit => '', :separator => ',')%></span></button> 
+    </div>
+  </div>      
+  </section>
+
+  
+ 
 
 <%end%>
 
 <script>
-    function alteraValor(valor){
-      console.log(valor);
-      $()
+  
+</script>
+
+<script>
+ 
+    function adicionaItem(valor, base){      
+      var qtd = $(`#qtdAdicional${valor}`)[0]['value'];
+      var limite = $(`#limiteBase${base}`)[0]['textContent'].replace(' ITEMS', '');
+
+      var somaBase = 0
+      $(`.base${base}`).each(function(index){       
+       var valor = $(`.base${base}`)[`${index}`]['value'];
+       somaBase = somaBase + parseInt(valor);        
+      });
+
+      if(somaBase >= parseInt(limite)){
+        $(`.basebutton${base}`).attr('disabled', true)
+      }else{
+        $(`.basebutton${base}`).removeAttr('disabled')
+        soma = parseInt(qtd) + 1;
+        $(`#qtdAdicional${valor}`)[0]['value'] = soma;
+      }
+      console.log(somaBase);
+
+         
+    }
+
+</script>
+
+<script>
+  
+    function removeItem(valor, base){
+      console.log(`${valor}` + `${base}`);
+      var limite = $(`#limiteBase${base}`)[0]['textContent'].replace(' ITEMS', '');
+      var qtd = $(`#qtdAdicional${valor}`)[0]['value'];
+      soma = parseInt(qtd) - 1;
+      if(soma < 0){
+        
+      }else{
+       $(`#qtdAdicional${valor}`)[0]['value'] = soma;
+      }
+
+      var somaBase = 0
+      $(`.base${base}`).each(function(index){       
+       var valor = $(`.base${base}`)[`${index}`]['value'];
+       somaBase = somaBase + parseInt(valor);        
+      });
+      
+      if(somaBase >= parseInt(limite)){
+        $(`.basebutton${base}`).attr('disabled', true)
+      }else{
+        $(`.basebutton${base}`).removeAttr('disabled')
+      }
+      console.log(somaBase);
     }
 </script>
+

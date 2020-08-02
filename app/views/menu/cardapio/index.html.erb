@@ -1,72 +1,177 @@
-<main class="flex-shrink-0 main-container pb-0">
-       
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                
-                
-                <div class="container mb-4">
-                    <div class="swiper-container swiper-offers">
-                        <div class="swiper-wrapper">                            
-                            <div class="swiper-slide w-auto">
-                                <div class="card w-250 position-relative overflow-hidden bg-dark text-white border-0">
-                                    <div class="background">
-                                        <img src="/template/mobile/assets/img/food2.jpg" alt="" s>
-                                    </div>
-                                    <div class="card-body text-center z-1 h-50"></div>
-                                    <div class="card-footer border-0 z-1">
-                                        <div class="media">
-                                            <div class="media-body" style='height: 150px'>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                            
+<section class="restaurant-detailed-banner">
+    <!-- Foto de Fundo -->
+    <div class="text-center">
+    <img class="img-fluid cover" src="https://askbootstrap.com/preview/osahan-eat/img/mall-dedicated-banner.png">
+    </div>
+    <%
+        aberto = Time.now.strftime('%A').downcase + "_open"
+        fechado = Time.now.strftime('%A').downcase + "_close"
+        empresa = Company.select("#{aberto} as aberto", "#{fechado} as fechado").find($empresaMenu.id)
+    %>
+    <% 
+        if empresa.aberto.to_time <= Time.now && empresa.fechado.to_time >= Time.now 
+            badge = 'success'
+            info = 'Aberto'
+        else
+            badge = 'danger'
+            info = 'Fechado'
+        end
+    %>
+    <div class="restaurant-detailed-header">
+        <div class="container">
+            <div class="row d-flex align-items-end">
+                    <div class="col-md-8">
+                        <div class="restaurant-detailed-header-left">
+                            <img class="img-fluid mr-3 float-left" alt="osahan" src="https://askbootstrap.com/preview/osahan-eat/img/1.jpg">
+                            <h2 class="text-white"><%= $empresaMenu.nome%></h2>
+                            <p class="text-white mb-1"><i class="icofont-location-pin"></i> <%= $empresaMenu.rua.upcase%>,<%= $empresaMenu.numero.upcase%> - <%= $empresaMenu.bairro%> <span class="badge badge-<%=badge%>"><%=info%></span>
+                            </p>
+                            <p class="text-white mb-0"><i class="icofont-food-cart"></i> <%= $empresaMenu.cidade.upcase%> /<%= $empresaMenu.estado%>
+                            </p>
                         </div>
                     </div>
+                <div class="col-md-4">
+                    <div class="restaurant-detailed-header-right text-right">
+                        <button class="btn btn-<%=badge%>" type="button">
+                            <i class="icofont-clock-time"></i> <%= empresa.aberto %> - <%= empresa.fechado %>
+                        </button>
+                    </div>
                 </div>
-                
-                <div class="container">
-                  <% $categorias.each do |categoria| %>
-                    <h6 id="<%=categoria.nome%>" class="page-subtitle" style="text-align: center;"><%= categoria.nome%></h6>
-                    <% produtos = Product.where(category_id: categoria.id).where(status: true) %>
-                    <% produtos.each do |produto| %>
-                    <% if produto.promocao_ativa == true
-                        valor = produto.valor_promocional
-                      else
-                        valor = produto.valor
-                      end%>
-                      <%= link_to "/menu/product/#{produto.id}" do %>
-                      <div class="card  border-0 shadow-light mb-4">
-                          <div class="card-body position-relative">
-                              <div class="row">
-                                  <div class="col-auto w-100px pr-0 align-self-center">
-                                      <div class="h-80 position-relative">
-                                          <div class="background background-h-100">
-                                              <img src="/template/mobile/assets/img/banner1.png" alt="">
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="col">
-                                      <p class="mb-1"><%=produto.nome %></p>
-                                      <p class="mb-2 small">                                        
-                                        <span class="text-mute"><%= produto.descricao %></span> 
-                                      </p>
-                                      <div class="row">
-                                          <div class="col text-left">
-                                              <p class="text-success my-0"><%= number_to_currency(valor, :unit => 'R$ ')%></p>
-                                          </div>
-                                          <div class="col-auto"><button class="btn btn-sm btn-link text-default p-0"><i class="material-icons">shopping_basket</i></button></div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <%end%>
-                      <%end%>
-                  <%end%>                    
-                </div>                
-            </div>            
+            </div>
         </div>
-        
-    </main>
+    </div>
+ 
+</section>
+<section class="offer-dedicated-body pt-2 pb-2 mt-4 mb-4">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="offer-dedicated-body-left">
+                     <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-order-online" role="tabpanel" aria-labelledby="pills-order-online-tab">
+                           <div id="#menu" class="bg-white rounded shadow-sm p-4 mb-4 explore-outlets">
+                              <h6 class="mb-3">Mais Populares  <span class="badge badge-success"><i class="icofont-tags"></i>Com desconto </span></h6>
+                              <div class="owl-carousel owl-theme owl-carousel-five offers-interested-carousel mb-3">
+                                 
+                                <%  @produtos_promocao.each do |promocao| %>
+                                    
+                                    <div class="item">
+                                        <div class="mall-category-item">
+                                            <a href="/menu/product/<%= promocao.id%>">
+                                                <img class="img-fluid" src="https://askbootstrap.com/preview/osahan-eat/img/list/1.png">
+                                                <h6><%= promocao.nome%></h6>                                                
+                                            </a>
+                                        </div>
+                                    </div>
+                                <%end%>
+
+                              </div>
+                           </div>
+                           <div class="row">
+                              <h5 class="mb-4 mt-3 col-md-12">Best Sellers</h5>
+                                <% @produtos_novos.each do |produto| %>
+                                    <%
+                                    if produto.promocao_ativa == true
+                                        valor = produto.valor_promocional
+                                        info = 'success'
+                                        promocao = 'Produto promocional'                                        
+                                    else
+                                        valor = produto.valor
+                                    end
+                                    %>
+                                    <div class="col-md-4 col-sm-6 mb-4">
+                                        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
+                                            <div class="list-card-image">
+                                            <div class="star position-absolute">
+                                                <span class='badge badge-<%=info%>'><%=promocao%></span>
+                                            </div>
+                                            <div class="favourite-heart text-danger position-absolute">                                                
+                                            </div>
+                                            
+                                                <a href="/menu/product/<%= produto.id%>">
+                                                    <img src="https://askbootstrap.com/preview/osahan-eat/img/list/7.png" class="img-fluid item-img">
+                                                </a>
+                                            </div>
+                                            <div class="p-3 position-relative">
+                                                <div class="list-card-body">
+                                                    <h6 class="mb-1"><a href="/menu/product/<%= produto.id%>" class="text-black"><%= produto.nome%></a></h6>
+                                                    <p class="text-gray mb-2">
+                                                        <%=produto.descricao%>
+                                                    </p>
+                                                    <p class="text-gray time mb-0">
+                                                        <a class="btn btn-link btn-sm pl-0 text-black pr-0" href="/menu/product/<%= produto.id%>">
+                                                            <%= number_to_currency(valor, :unit => 'R$ ', :separator => ',')%>
+                                                        </a> |  
+                                                        <span class="btn btn-link btn-sm pl-0 text-black pr-0"> <i class="icofont-clock-time"></i><%= produto.tempo_preparo%>min</span> 
+                                                        <span class="float-right"> 
+                                                            <a class="btn btn-outline-secondary btn-sm" href="/menu/product/<%= produto.id%>">ADD</a>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>                                  
+                                    </div>
+                                <%end%>                             
+                              
+                           </div> 
+                           <br>
+                           <br>
+                           <div class="row">                              
+                                <% $categorias.each do |categoria| %>
+                                    <h5 class="mb-4 mt-3 col-md-12" style="text-align: center;" id="<%= categoria.id%>categoria"><%=categoria.nome%></h5>
+                                     <% produtos = Product.where(company_id: $empresaMenu.id).where(status: true).where(category_id: categoria.id) %>
+                                     <% produtos.each do |produto| %>   
+                                        <%
+                                        if produto.promocao_ativa == true
+                                            valor = produto.valor_promocional
+                                            info = 'success'
+                                            promocao = 'Produto promocional'                                        
+                                        else
+                                            valor = produto.valor
+                                        end
+                                        %>
+                                        <div class="col-md-4 col-sm-6 mb-4">
+                                            <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
+                                                <div class="list-card-image">
+                                                <div class="star position-absolute">
+                                                    <span class='badge badge-<%=info%>'><%=promocao%></span>
+                                                </div>
+                                                <div class="favourite-heart text-danger position-absolute">                                                
+                                                </div>
+                                                
+                                                    <a href="/menu/product/<%= produto.id%>">
+                                                        <img src="https://askbootstrap.com/preview/osahan-eat/img/list/7.png" class="img-fluid item-img">
+                                                    </a>
+                                                </div>
+                                                <div class="p-3 position-relative">
+                                                    <div class="list-card-body">
+                                                        <h6 class="mb-1"><a href="/menu/product/<%= produto.id%>" class="text-black"><%= produto.nome%></a></h6>
+                                                        <p class="text-gray mb-2">
+                                                            <%=produto.descricao%>
+                                                        </p>
+                                                        <p class="text-gray time mb-0">
+                                                            <a class="btn btn-link btn-sm pl-0 text-black pr-0" href="/menu/product/<%= produto.id%>">
+                                                                <%= number_to_currency(valor, :unit => 'R$ ', :separator => ',')%>
+                                                            </a> |  
+                                                            <span class="btn btn-link btn-sm pl-0 text-black pr-0"> <i class="icofont-clock-time"></i><%= produto.tempo_preparo%>min</span> 
+                                                            <span class="float-right"> 
+                                                                <a class="btn btn-outline-secondary btn-sm" href="/menu/product/<%= produto.id%>">ADD</a>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>                                  
+                                        </div>
+                                    <%end%>
+                                <%end%>                             
+                              
+                           </div>                          
+                        </div>
+                        
+                     </div>
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+</section> 

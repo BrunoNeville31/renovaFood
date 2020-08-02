@@ -236,7 +236,7 @@ ActiveRecord::Schema.define(version: 2020_07_22_034724) do
 
   create_table "side_product_steps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nome"
-    t.string "valor"
+    t.float "valor", default: 0.0
     t.bigint "product_step_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
