@@ -26,7 +26,7 @@
                   <div class="bg-white rounded border shadow-sm mb-4">
                       <div class="gold-members p-3 border-bottom">
                         <span class="count-number float-right">
-                            <button type="button" class="btn btn-outline-secondary  btn-sm left dec" onclick="removeItem(<%= adicional.id%>, <%= base.id%>)"> 
+                            <button type="button" class="btn btn-outline-secondary  btn-sm left dec basebuttonMinus<%= base.id%>" onclick="removeItem(<%= adicional.id%>, <%= base.id%>)"> 
                                 <i class="icofont-minus"></i> 
                             </button>
                               <input class="count-number-input  base<%= base.id%>" type="text" name="adicional[<%= base.id %>][<%= adicional.id%>]" id="qtdAdicional<%= adicional.id%>" value="0" readonly="">
@@ -72,17 +72,9 @@
   </div>      
   </section>
 
-  
- 
-
 <%end%>
 
-<script>
-  
-</script>
-
-<script>
- 
+<script> 
     function adicionaItem(valor, base){      
       var qtd = $(`#qtdAdicional${valor}`)[0]['value'];
       var limite = $(`#limiteBase${base}`)[0]['textContent'].replace(' ITEMS', '');
@@ -112,8 +104,7 @@
 
 <script>
   
-    function removeItem(valor, base){
-      console.log(`${valor}` + `${base}`);
+    function removeItem(valor, base){      
       var limite = $(`#limiteBase${base}`)[0]['textContent'].replace(' ITEMS', '');
       var qtd = $(`#qtdAdicional${valor}`)[0]['value'];
 
@@ -121,12 +112,12 @@
       var valorFinal = $('#valor_final')[0]['textContent'].replace(',','.');
 
       valorfinalcomAdicional = parseFloat(valorFinal) - parseFloat(valorAdicional)
-
       soma = parseInt(qtd) - 1;
+      console.log(soma);
       if(soma < 0){
-        
       }else{
        $(`#qtdAdicional${valor}`)[0]['value'] = soma;
+       $('#valor_final')[0]['textContent'] = valorfinalcomAdicional;
       }
 
       var somaBase = 0
@@ -138,10 +129,7 @@
       if(somaBase >= parseInt(limite)){
         $(`.basebutton${base}`).attr('disabled', true)
       }else{
-        $(`.basebutton${base}`).removeAttr('disabled')
-        $('#valor_final')[0]['textContent'] = valorfinalcomAdicional;
-      }
-      console.log(somaBase);
+        $(`.basebutton${base}`).removeAttr('disabled')        
+      }  
     }
 </script>
-
