@@ -24,9 +24,8 @@ class Admin::CompanyController < AdminController
     end
   end
 
-  def taxa_entrega   
-
-    taxa = params[:taxa_entrega]
+  def taxa_entrega       
+    taxa = params[:taxa_entrega].gsub(',','.')
     emp = Company.find($empresa)
     emp.taxa_entrega = taxa
     emp.save

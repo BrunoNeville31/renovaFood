@@ -423,12 +423,15 @@
                     <div class="modal-content">                        
                         <div class="modal-body">
                             <h4 style="text-align: center">Taxa de Entrega(R$ por KM)</h4>
-                            <%=form_with(url: 'taxa_entrega',method: :get) do |form|%>
-                                <div class="col-sm-12">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>Taxa de Entrega</label>
-                                            <input type="text" name="taxa_entrega" class="form-control" />
+                            <%=form_with(url: '/admin/taxa_entrega', method: :get) do |form|%>
+                                <br>
+                                <div class="col-sm-12">   
+                                    <div class="col-lg-6">                                        
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="option-date">R$</span>
+                                            </div>
+                                            <input type="text" name="taxa_entrega" id="input-currency" class="form-control money">
                                         </div>
                                     </div>
                                 </div>
