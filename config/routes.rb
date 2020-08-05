@@ -10,7 +10,8 @@ root 'admin/dashboard#index'
     get '/product/:id', to: 'cardapio#produto_unico'
     get '/group/:id', to: 'cardapio#grupo'
     post '/armazena_pedido', to: 'cardapio#armazena_pedido'
-    get '/finaliza_pedido', to: 'cardapio#finalizar_pedido'  
+    get '/detalhes_pedido', to: 'cardapio#detalhes_pedido' 
+    get '/limpar_carrinho', to: 'cardapio#limpar_carrinho' 
   end
 
   namespace :admin do

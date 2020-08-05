@@ -17,6 +17,7 @@ class Menu::CardapioController < MenuController
     end
     
     def armazena_pedido 
+        require 'securerandom'
         adicionais = [] 
 
         if params[:adicional].present?
@@ -46,18 +47,22 @@ class Menu::CardapioController < MenuController
             primeiro_pedido(adicionais, params)
             session[:valor_final] = params[:valor_final].to_f
         end
+
+        
         respond_to do |format|
-            format.html{redirect_to "/menu/finaliza_pedido/", notice: 'Pedido Adicionado com sucesso!'}
+            format.html{redirect_to "/menu/detalhes_pedido/", notice: 'Pedido Adicionado com sucesso!'}
         end
     end
-    def finalizar_pedido
+    def detalhes_pedido
         @pagamentos = Payment.where(status: true).where(company_id: $empresaMenu.id)
     end
 
     def primeiro_pedido(*adicionais, params)        
         produto = Product.find(params[:produto_cardapio])
         $pedido = [
+            "codigo_pedido": SecureRandom.hex(4),
             "produto_cardapio_id": produto.id,
+            "valor_com_adicional": params[:valor_final].to_f,
             "produto_cardapio": "#{produto.nome}",
             "adicionais":
                 adicionais
@@ -68,10 +73,18 @@ class Menu::CardapioController < MenuController
         produto = Product.find(params[:produto_cardapio])
         $pedido += [
             "produto_cardapio_id": produto.id,
+            "valor_com_adicional": params[:valor_final].to_f,
             "produto_cardapio": "#{produto.nome}",
             "adicionais":
                 adicionais
         ] 
+    end
+
+    def limpar_carrinho
+        $pedido = nil        
+        respond_to do |format|
+            format.html{redirect_to '/menu', notice: 'Carrinho Vazio'}
+        end
     end
    
 end
