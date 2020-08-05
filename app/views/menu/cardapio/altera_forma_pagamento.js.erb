@@ -1,0 +1,9 @@
+$('#formaDePag').modal('hide');
+
+<%  if $formaPagamento.present? %>
+    html = ''
+    <% $formaPagamento.each do |pagamento| %>
+        html += <%=pagamento%>
+    <%end%>    
+    $('#formaDePagamento')[0]['textContent'] = html;
+<%end%>

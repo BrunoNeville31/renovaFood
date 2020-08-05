@@ -81,9 +81,28 @@ class Menu::CardapioController < MenuController
     end
 
     def limpar_carrinho
-        $pedido = nil        
+        $pedido = nil  
+        $formaPagamento = nil      
         respond_to do |format|
             format.html{redirect_to '/menu', notice: 'Carrinho Vazio'}
+        end
+    end
+
+    def altera_forma_pagamento
+        
+        $formaPagamento = []
+        if params[:pag].present?
+            params[:pag].each do |chave, valor|
+                pagamento = Payment.find(chave)                
+                $formaPagamento.push(pagamento.nome)
+            end
+            respond_to do |format|
+                format.js
+            end
+        else
+            respond_to do |format|
+                format.js
+            end
         end
     end
    

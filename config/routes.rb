@@ -12,6 +12,7 @@ root 'admin/dashboard#index'
     post '/armazena_pedido', to: 'cardapio#armazena_pedido'
     get '/detalhes_pedido', to: 'cardapio#detalhes_pedido' 
     get '/limpar_carrinho', to: 'cardapio#limpar_carrinho' 
+    post '/altera_forma_pagamento', to: 'cardapio#altera_forma_pagamento'
   end
 
   namespace :admin do

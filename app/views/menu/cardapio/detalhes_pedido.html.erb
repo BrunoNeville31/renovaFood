@@ -26,10 +26,13 @@
                 <div class="row">
                     <div class="col-md-5">                        
                         <small>Entregar Para</small>
-                        <h6 class="mb-1 mt-1"><span class="text-black"><i class="icofont-map-pins"></i> Other
+                        <h6 class="mb-1 mt-1"><span class="text-black"><i class="icofont-map-pins"></i> Endereço
                             </span>
                         </h6>
                         <p class="text-gray mb-0">291, Jawaddi Kalan, Ludhiana, Punjab 141002, India
+                        </p>
+                        <p class="mb-0 text-info">
+                            <a href="#" data-toggle="modal" data-target="#modalEntrega"><small>Configurar Entrega</small></a>
                         </p>
                     </div>
                     <div class="col-md-7">
@@ -44,8 +47,9 @@
                         <p class="mb-2"> Entrega <span class="float-right text-secondary">R$10.00</span></p>
                         <hr>
                         <p class="mb-0 font-weight-bold text-black">Valor Total  <span class="float-right text-secondary"><%= number_to_currency(session[:valor_final].to_f, :unit => 'R$ ', :separator => ',')%></span></p>
-                        <p class="mb-0 text-info"><small>Paid via Credit/Debit card
-                            <span class="float-right text-danger">$620 OFF</span></small>
+                        <p class="mb-0 text-info">
+                            <a href="#" data-toggle="modal" data-target="#formaDePag"><small>Ajustar Forma de Pagamento</a>
+                            <span class="float-right text-danger" id="formaDePagamento">Dinheiro</span></small>
                         </p>
                     </div>
                 </div>
@@ -74,3 +78,58 @@
     </div>
     </div>
 </section>
+
+
+<!-- Modal de Entrega -->
+
+<div class="modal fade" id="modalEntrega" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="TituloModalCentralizado">Endereço de Entrega</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Salvar mudanças</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Forma de Pagamento -->
+
+<div class="modal fade" id="formaDePag" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <%= form_with(url: '/menu/altera_forma_pagamento', method: :post, remote: true) do |form| %>
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="TituloModalCentralizado">Forma de Pagamento</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <% pags = Payment.where(company_id: $empresaMenu.id)%>
+            <% pags.each do |pag| %>            
+                <div class="form-group col-md-12">
+                    <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="pag[<%=pag.id%>]" id="<%= pag.id%>pag">
+                    <label class="custom-control-label" for="<%= pag.id%>pag"><%= pag.nome %></label>
+                    </div>
+                </div>
+            <%end%>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Alterar</button>
+        </div>
+        </div>
+    <%end%>
+  </div>
+</div>
