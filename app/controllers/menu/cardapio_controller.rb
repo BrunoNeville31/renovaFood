@@ -55,6 +55,8 @@ class Menu::CardapioController < MenuController
     end
     def detalhes_pedido
         @pagamentos = Payment.where(status: true).where(company_id: $empresaMenu.id)
+        @delivery = DeliveryPrice.where(company_id: $empresa)
+        $entrega = {}
     end
 
     def primeiro_pedido(*adicionais, params)        
@@ -96,6 +98,7 @@ class Menu::CardapioController < MenuController
                 pagamento = Payment.find(chave)                
                 $formaPagamento.push(pagamento.nome)
             end
+            
             respond_to do |format|
                 format.js
             end
@@ -103,6 +106,22 @@ class Menu::CardapioController < MenuController
             respond_to do |format|
                 format.js
             end
+        end
+    end
+
+
+    def altera_endereco_entrega
+        
+        bairro = DeliveryPrice.find(params[:delivery_address])
+        $entrega[:bairro] = bairro.bairro_nome
+        $entrega[:rua] = params[:rua]
+        $entrega[:numero] = params[:numero]
+        $entrega[:complemento] = params[:complemento]
+        $entrega[:cidade] = params[:cidade]
+        $entrega[:valor] = bairro.valor.to_f
+        
+        respond_to do |format|
+            format.js
         end
     end
    

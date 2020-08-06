@@ -36,7 +36,7 @@ class Admin::CompanyController < AdminController
   end
 
   def consulta_pedido
-    debugger
+    
     params[:ordem_pedido] # params que chega
     respond_to do |format|
         format.js

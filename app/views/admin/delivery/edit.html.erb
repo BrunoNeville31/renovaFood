@@ -1,0 +1,35 @@
+<%=form_with(url: admin_delivery_path, model: @delivery, method: :patch, local: true) do |form|%>
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Editando Taxas de Entrega</h4>   
+    
+                    <div class="row">
+                        
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="formrow-email-input">Bairro</label>                            
+                                <%=form.text_field :bairro_nome, class: 'form-control'%>
+                            </div>
+                        </div>                        
+                        <div class="col-md-3">
+                            <label for="input-currency-valor">Valor</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="option-date">R$</span>
+                                </div>
+                                <input type="text" name="delivery_price[valor]" id="input-currency-valor" class="form-control money" placeholder="00,00" value="<%= number_to_currency(@delivery.valor, :unit => 'R$ ')%>">
+                            </div>
+                        </div>                      
+                    </div>            
+            </div>
+        </div>            
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <button type="submit" class="btn btn-primary btn-block w-md">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%end%>

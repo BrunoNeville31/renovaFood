@@ -29,7 +29,7 @@
                         <h6 class="mb-1 mt-1"><span class="text-black"><i class="icofont-map-pins"></i> Endereço
                             </span>
                         </h6>
-                        <p class="text-gray mb-0">291, Jawaddi Kalan, Ludhiana, Punjab 141002, India
+                        <p class="text-gray mb-0" id="entrega_endereco"><%= $entrega[:rua] %>, <%= $entrega[:numero]%> - <%= $entrega[:complemento]%>/<%= $entrega[:cidade]%>
                         </p>
                         <p class="mb-0 text-info">
                             <a href="#" data-toggle="modal" data-target="#modalEntrega"><small>Configurar Entrega</small></a>
@@ -44,9 +44,9 @@
                             <%end%>
                                 <span class="float-right text-secondary"><%= number_to_currency(pedido[:valor_com_adicional], :unit => 'R$ ', :separator => ',')%></span></p>
                         <%end%>
-                        <p class="mb-2"> Entrega <span class="float-right text-secondary">R$10.00</span></p>
+                        <p class="mb-2"> Entrega <span class="float-right text-secondary" id="valor_entrega"></span></p>
                         <hr>
-                        <p class="mb-0 font-weight-bold text-black">Valor Total  <span class="float-right text-secondary"><%= number_to_currency(session[:valor_final].to_f, :unit => 'R$ ', :separator => ',')%></span></p>
+                        <p class="mb-0 font-weight-bold text-black">Valor Total  <span class="float-right text-secondary" id="valor_total_final"><%= number_to_currency(session[:valor_final].to_f, :unit => 'R$ ', :separator => ',')%></span></p>
                         <p class="mb-0 text-info">
                             <a href="#" data-toggle="modal" data-target="#formaDePag"><small>Ajustar Forma de Pagamento</a>
                             <span class="float-right text-danger" id="formaDePagamento">Dinheiro</span></small>
@@ -82,25 +82,59 @@
 
 <!-- Modal de Entrega -->
 
-<div class="modal fade" id="modalEntrega" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="TituloModalCentralizado">Endereço de Entrega</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-          <span aria-hidden="true">&times;</span>
-        </button>
+<div class="modal fade" id="modalEntrega" tabindex="-1" role="dialog" aria-labelledby="add-address" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="add-address">Endereço de Entrega</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                    <%= form_with(url: '/menu/altera_endereco_entrega', method: :post, remote: true) do |form|%>
+                     <div class="form-row">
+                        <div class="form-group col-md-12">
+                           <label for="inputPassword">Delivery Area</label>
+                           <div class="input-group">
+                              <select name="delivery_address" class="form-control">
+                                <% @delivery.each do |delivery| %>    
+                                    <option value="<%=delivery.id%>"><%=delivery.bairro_nome%></option>
+                                <%end%>
+                              <select>                               
+                           </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                           <label for="inputPassword1">Rua
+                           </label>
+                           <input type="text" class="form-control" placeholder="Rua" name="rua">
+                        </div>
+                        <div class="form-group col-md-12">
+                           <label for="inputPassword2">Número
+                           </label>
+                           <input type="text" class="form-control" placeholder="Numero" name="numero">
+                        </div>  
+                        <div class="form-group col-md-12">
+                           <label for="inputPassword3">Complemento
+                           </label>
+                           <input type="text" class="form-control" placeholder="Complemento" name="complemento">
+                        </div>
+                        <div class="form-group col-md-12">
+                           <label for="inputPassword4">Cidade
+                           </label>
+                           <input type="text" class="form-control" placeholder="Cidade" name="cidade">
+                        </div>                       
+                     </div>
+                  
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn d-flex w-50 text-center justify-content-center btn-outline-primary" data-dismiss="modal">Cancelar
+                  </button><button type="submit" class="btn d-flex w-50 text-center justify-content-center btn-primary">Salvar</button>
+               </div>
+               <%end%>
+            </div>
+         </div>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary">Salvar mudanças</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Modal de Forma de Pagamento -->
 

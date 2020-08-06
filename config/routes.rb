@@ -1,5 +1,6 @@
 Rails.application.routes.draw do  
   
+  
 post '/bot/auth', to: 'bot/start#auth'
 get '/bot/init', to: 'bot/start#init'
 post '/bot/conversation', to: 'bot/start#conversation'
@@ -13,10 +14,12 @@ root 'admin/dashboard#index'
     get '/detalhes_pedido', to: 'cardapio#detalhes_pedido' 
     get '/limpar_carrinho', to: 'cardapio#limpar_carrinho' 
     post '/altera_forma_pagamento', to: 'cardapio#altera_forma_pagamento'
+    post '/altera_endereco_entrega', to: 'cardapio#altera_endereco_entrega'
   end
 
   namespace :admin do
     root 'dashboard#index'
+    resources :delivery
     resources :client
     resources :product
     resources :category

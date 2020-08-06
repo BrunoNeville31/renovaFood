@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_22_034724) do
+ActiveRecord::Schema.define(version: 2020_08_06_192010) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -132,6 +132,15 @@ ActiveRecord::Schema.define(version: 2020_07_22_034724) do
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_compose_product_menus_on_product_id"
     t.index ["product_simple_id"], name: "index_compose_product_menus_on_product_simple_id"
+  end
+
+  create_table "delivery_prices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "bairro_nome"
+    t.float "valor"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_delivery_prices_on_company_id"
   end
 
   create_table "licencas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -274,6 +283,7 @@ ActiveRecord::Schema.define(version: 2020_07_22_034724) do
   add_foreign_key "companies", "admins"
   add_foreign_key "compose_product_menus", "product_simples"
   add_foreign_key "compose_product_menus", "products"
+  add_foreign_key "delivery_prices", "companies"
   add_foreign_key "payments", "companies"
   add_foreign_key "product_simples", "companies"
   add_foreign_key "product_steps", "companies"
