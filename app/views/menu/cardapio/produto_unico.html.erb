@@ -5,8 +5,12 @@
 </style>
 <section class="restaurant-detailed-banner">
     <!-- Foto de Fundo -->
-    <div class="text-center">
-    <img class="img-fluid cover" src="https://askbootstrap.com/preview/osahan-eat/img/mall-dedicated-banner.png">
+    <div class="text-center">    
+      <%if @produto.avatar_product.attached? %>                                                        
+          <%= image_tag(@produto.avatar_product, class: 'img-fluid')%>
+      <%else%>
+        <img class="img-fluid cover" src="https://askbootstrap.com/preview/osahan-eat/img/mall-dedicated-banner.png">
+      <%end%>
     </div>
 </section>
 

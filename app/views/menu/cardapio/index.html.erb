@@ -21,8 +21,9 @@
         <div class="container">
             <div class="row d-flex align-items-end">
                     <div class="col-md-8">
-                        <div class="restaurant-detailed-header-left">
-                            <img class="img-fluid mr-3 float-left" alt="osahan" src="https://askbootstrap.com/preview/osahan-eat/img/1.jpg">
+                        <div class="restaurant-detailed-header-left">  
+                                <img class="img-fluid mr-3 float-left" alt="osahan" src="https://askbootstrap.com/preview/osahan-eat/img/1.jpg">                          
+                                
                             <h2 class="text-white"><%= $empresaMenu.nome%></h2>
                             <p class="text-white mb-1"><i class="icofont-location-pin"></i> <%= $empresaMenu.rua.upcase%>,<%= $empresaMenu.numero.upcase%> - <%= $empresaMenu.bairro%> <span class="badge badge-<%=badge%>"><%=info%></span>
                             </p>
@@ -58,7 +59,12 @@
                                     <div class="item">
                                         <div class="mall-category-item">
                                             <a href="/menu/product/<%= promocao.id%>">
-                                                <img class="img-fluid" src="https://askbootstrap.com/preview/osahan-eat/img/list/1.png">
+                                                
+                                                <%if promocao.avatar_product.attached? %>                                                        
+                                                    <%= image_tag(promocao.avatar_product, class: 'img-fluid item-img')%>
+                                                <%else%>
+                                                    <img class="img-fluid" src="https://askbootstrap.com/preview/osahan-eat/img/list/1.png">
+                                                <%end%>
                                                 <h6><%= promocao.nome%></h6>                                                
                                             </a>
                                         </div>
@@ -89,7 +95,12 @@
                                             </div>
                                             
                                                 <a href="/menu/product/<%= produto.id%>">
-                                                    <img src="https://askbootstrap.com/preview/osahan-eat/img/list/7.png" class="img-fluid item-img">
+                                                    
+                                                    <%if produto.avatar_product.attached? %>                                                        
+                                                        <%= image_tag(produto.avatar_product, class: 'img-fluid item-img')%>
+                                                    <%else%>
+                                                        <img src="https://askbootstrap.com/preview/osahan-eat/img/list/7.png" class="img-fluid item-img">
+                                                    <%end%>
                                                 </a>
                                             </div>
                                             <div class="p-3 position-relative">
@@ -140,7 +151,11 @@
                                                 </div>
                                                 
                                                     <a href="/menu/product/<%= produto.id%>">
-                                                        <img src="https://askbootstrap.com/preview/osahan-eat/img/list/7.png" class="img-fluid item-img">
+                                                        <%if produto.avatar_product.attached? %>                                                        
+                                                            <%= image_tag(produto.avatar_product, class: 'img-fluid item-img')%>
+                                                        <%else%>
+                                                            <img src="https://askbootstrap.com/preview/osahan-eat/img/list/7.png" class="img-fluid item-img"> 
+                                                        <%end%>
                                                     </a>
                                                 </div>
                                                 <div class="p-3 position-relative">

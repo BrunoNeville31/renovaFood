@@ -5,10 +5,10 @@ post '/bot/auth', to: 'bot/start#auth'
 get '/bot/init', to: 'bot/start#init'
 post '/bot/conversation', to: 'bot/start#conversation'
 root 'admin/dashboard#index'
-
+get '/cardapio/:id', to: 'menu/cardapio#index'
   namespace :menu do
     root 'cardapio#index'
-    get '/:id', to: 'cardapio#index'
+    
     get '/product/:id', to: 'cardapio#produto_unico'
     get '/group/:id', to: 'cardapio#grupo'
     post '/armazena_pedido', to: 'cardapio#armazena_pedido'
