@@ -8,6 +8,7 @@ root 'admin/dashboard#index'
 
   namespace :menu do
     root 'cardapio#index'
+    get '/:id', to: 'cardapio#index'
     get '/product/:id', to: 'cardapio#produto_unico'
     get '/group/:id', to: 'cardapio#grupo'
     post '/armazena_pedido', to: 'cardapio#armazena_pedido'
@@ -15,6 +16,10 @@ root 'admin/dashboard#index'
     get '/limpar_carrinho', to: 'cardapio#limpar_carrinho' 
     post '/altera_forma_pagamento', to: 'cardapio#altera_forma_pagamento'
     post '/altera_endereco_entrega', to: 'cardapio#altera_endereco_entrega'
+    get '/finaliza_pedido', to: 'cardapio#finaliza_pedido'
+    post '/finaliza_pedido/salvar', to: 'cardapio#salvar_perfil'
+    get '/pedido_finalizado', to: 'cardapio#concluido'
+    get '/perfil', to: 'cardapio#perfil'
   end
 
   namespace :admin do

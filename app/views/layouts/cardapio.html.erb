@@ -40,10 +40,14 @@
                      <a class="nav-link" href="/menu/">Home</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#"> Perfil</a>
+                     <a class="nav-link" href="/menu/perfil"> Perfil</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#"> Pedidos</a>
+                   <%if $pedido.nil?  %>
+                     <a class="nav-link" href="#"> Sem Pedidos </a>
+                   <%else%>
+                     <a class="nav-link" href="/menu/detalhes_pedido"> Pedidos </a>
+                   <%end%>
                   </li>
                   <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -4,9 +4,13 @@ $('#entrega_endereco')[0]['textContent'] = `<%= $entrega[:rua] %>, <%= $entrega[
 $('#valor_entrega')[0]['textContent'] = `<%= $entrega[:valor] %>`;
 
 
-valor_total = parseFloat($('#valor_total_final')[0]['textContent'].replace('R$ ','').replace(',','.'))
+valor_total =  '<%= session[:valor_final]%>'   
+console.log(valor_total);          
 valor_entrega = parseFloat($('#valor_entrega')[0]['textContent'].replace('R$ ','').replace(',','.'))
-
-valor = valor_total + valor_entrega
+console.log(valor_entrega);
+valor = parseFloat(valor_total.toLocaleString().replace(',','.')) + valor_entrega;
+console.log(valor);
 
 $('#valor_total_final')[0]['textContent'] = ` R$ ${valor.toLocaleString()}`;
+
+//parseFloat($('#valor_total_final')[0]['textContent'].replace('R$ ','').replace(',','.'))

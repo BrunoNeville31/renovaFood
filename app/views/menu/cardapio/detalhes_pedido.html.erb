@@ -15,7 +15,7 @@
             </div>
             <div class="bg-white p-4 shadow-lg mb-2">
                 <div class="mb-2"></div>
-                <h6 class="mb-1 mt-1"><a href="/menu" class="text-black"><button type="button" class="btn btn-success btn-block">Continuar adicionando Pedidos</button>
+                <h6 class="mb-1 mt-1"><a href="/menu" class="text-black"><button type="button" class="btn btn-info btn-block">Continuar adicionando Pedidos</button>
                 <h6 class="mb-1 mt-1">
                 <%= link_to "Limpar Carrinho", '/menu/limpar_carrinho', class: 'btn btn-danger btn-block'%>
                 </h6>                
@@ -44,9 +44,9 @@
                             <%end%>
                                 <span class="float-right text-secondary"><%= number_to_currency(pedido[:valor_com_adicional], :unit => 'R$ ', :separator => ',')%></span></p>
                         <%end%>
-                        <p class="mb-2"> Entrega <span class="float-right text-secondary" id="valor_entrega"></span></p>
-                        <hr>
-                        <p class="mb-0 font-weight-bold text-black">Valor Total  <span class="float-right text-secondary" id="valor_total_final"><%= number_to_currency(session[:valor_final].to_f, :unit => 'R$ ', :separator => ',')%></span></p>
+                        <p class="mb-2"> Entrega <span class="float-right text-secondary" id="valor_entrega"><%= number_to_currency($entrega[:valor],:unit => 'R$ ')%></span></p>
+                        <hr><% entrega = $entrega[:valor].nil? ? 0 : $entrega[:valor]%>
+                        <p class="mb-0 font-weight-bold text-black">Valor Total  <span class="float-right text-secondary" id="valor_total_final"><%= number_to_currency(entrega + session[:valor_final],:unit => 'R$ ', :separator => ',')%></span></p>
                         <p class="mb-0 text-info">
                             <a href="#" data-toggle="modal" data-target="#formaDePag"><small>Ajustar Forma de Pagamento</a>
                             <span class="float-right text-danger" id="formaDePagamento">Dinheiro</span></small>
@@ -55,24 +55,11 @@
                 </div>
                 </div>
             </div>
-            <div class="bg-white p-4 shadow-lg mt-2">
-                <div class="row text-center">
-                <div class="col">
-                    <i class="icofont-tasks icofont-3x text-info"></i>
-                    <p class="mt-1 font-weight-bold text-dark mb-0">Order Received</p>
-                    <small class="text-info mb-0">NOW</small>
-                </div>
-                <div class="col">
-                    <i class="icofont-check-circled icofont-3x text-success"></i>
-                    <p class="mt-1 font-weight-bold text-dark mb-0">Order Confirmed</p>
-                    <small class="text-success mb-0">NEXT</small>
-                </div>
-                <div class="col">
-                    <i class="icofont-delivery-time icofont-3x text-primary"></i>
-                    <p class="mt-1 font-weight-bold text-dark mb-0">Order Picked Up</p>
-                    <small class="text-primary mb-0">LATER (ET : 30min)</small>
-                </div>
-                </div>
+            <div class="bg-white p-4 shadow-lg mt-2 mb-2">
+                <div class="mb-2"></div>
+                    <h6 class="mb-1 mt-1">
+                    <%= link_to "finalizar Pedido", '/menu/finaliza_pedido' ,class: 'btn btn-success btn-block'%>
+                </h6>  
             </div>
         </div>
     </div>

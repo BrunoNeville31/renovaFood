@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_06_192010) do
+ActiveRecord::Schema.define(version: 2020_08_07_053443) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -143,6 +143,29 @@ ActiveRecord::Schema.define(version: 2020_08_06_192010) do
     t.index ["company_id"], name: "index_delivery_prices_on_company_id"
   end
 
+  create_table "itens_adicional_pedidos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "nome"
+    t.integer "insumo_id"
+    t.bigint "itens_pedido_id"
+    t.integer "product_step_id"
+    t.integer "qtd"
+    t.decimal "valor_adicional", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["itens_pedido_id"], name: "index_itens_adicional_pedidos_on_itens_pedido_id"
+  end
+
+  create_table "itens_pedidos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "pedido_id"
+    t.string "adicional_nome"
+    t.integer "adicional_id"
+    t.string "valor"
+    t.integer "qtd_adicional"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pedido_id"], name: "index_itens_pedidos_on_pedido_id"
+  end
+
   create_table "licencas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "numero"
     t.integer "qtd_empresa"
@@ -161,6 +184,23 @@ ActiveRecord::Schema.define(version: 2020_08_06_192010) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_payments_on_company_id"
+  end
+
+  create_table "pedidos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "numero"
+    t.integer "numero_interno"
+    t.string "entrega_rua"
+    t.string "entrega_cidade"
+    t.string "entrega_complemento"
+    t.string "entrega_bairro"
+    t.decimal "taxa_entrega", precision: 10
+    t.integer "client_id"
+    t.decimal "valor_total", precision: 10
+    t.integer "status"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_pedidos_on_company_id"
   end
 
   create_table "product_simples", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -284,7 +324,10 @@ ActiveRecord::Schema.define(version: 2020_08_06_192010) do
   add_foreign_key "compose_product_menus", "product_simples"
   add_foreign_key "compose_product_menus", "products"
   add_foreign_key "delivery_prices", "companies"
+  add_foreign_key "itens_adicional_pedidos", "itens_pedidos"
+  add_foreign_key "itens_pedidos", "pedidos"
   add_foreign_key "payments", "companies"
+  add_foreign_key "pedidos", "companies"
   add_foreign_key "product_simples", "companies"
   add_foreign_key "product_steps", "companies"
   add_foreign_key "product_steps", "products"
