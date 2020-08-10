@@ -37,9 +37,11 @@ class Admin::CompanyController < AdminController
 
   def consulta_pedido
     
-    params[:ordem_pedido] # params que chega
-    respond_to do |format|
-        format.js
+    if params[:ordem_pedido].present? # params que chega
+      @situacao = Pedido.find_by(numero: params[:ordem_pedido]) 
+      respond_to do |format|
+          format.js
+      end
     end
   end
 

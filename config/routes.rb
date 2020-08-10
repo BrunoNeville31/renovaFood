@@ -1,11 +1,14 @@
 Rails.application.routes.draw do  
   
   
+  get 'notification/index'
 post '/bot/auth', to: 'bot/start#auth'
 get '/bot/init', to: 'bot/start#init'
 post '/bot/conversation', to: 'bot/start#conversation'
 root 'admin/dashboard#index'
+
 get '/cardapio/:id', to: 'menu/cardapio#index'
+get '/notifica_pedido/:id', to: 'notification#index'
   namespace :menu do
     root 'cardapio#index'
     

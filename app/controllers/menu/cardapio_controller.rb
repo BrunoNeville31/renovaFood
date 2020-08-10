@@ -210,6 +210,10 @@ class Menu::CardapioController < MenuController
                 end
             end            
         end
+        $numero = $pedido[0][:codigo_pedido]
+        $pedido = nil  
+        $formaPagamento = nil 
     end
+
    
 end

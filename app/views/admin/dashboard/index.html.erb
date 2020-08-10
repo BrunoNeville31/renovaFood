@@ -10,13 +10,10 @@
                   <i class="bx bx-copy-alt"></i>
                 </span>
               </div>
-              <h5 class="font-size-14 mb-0">Empresa Registradas</h5>
+              <h5 class="font-size-14 mb-0">Faturamento</h5>
             </div>
             <div class="text-muted mt-4">
-              <h4>1,452 <i class="mdi mdi-chevron-up ml-1 text-success"></i></h4>
-              <div class="d-flex">
-                <span class="badge badge-soft-success font-size-12"> + 0.2% </span> <span class="ml-2 text-truncate">From previous period</span>
-              </div>
+              <h4><%= number_to_currency(@faturamento, :unit => 'R$ ', :separator => ',')%></h4>              
             </div>
           </div>
         </div>
@@ -30,13 +27,10 @@
                   <i class="bx bx-copy-alt"></i>
                 </span>
               </div>
-              <h5 class="font-size-14 mb-0">Faturamento(Diário)</h5>
+              <h5 class="font-size-14 mb-0">Pedidos</h5>
             </div>
             <div class="text-muted mt-4">
-              <h4>1,452 <i class="mdi mdi-chevron-up ml-1 text-success"></i></h4>
-              <div class="d-flex">
-                <span class="badge badge-soft-success font-size-12"> + 0.2% </span> <span class="ml-2 text-truncate">From previous period</span>
-              </div>
+              <h4 style="text-align: center;"><%=@pedidos%></h4>              
             </div>
           </div>
         </div>
@@ -50,13 +44,10 @@
                   <i class="bx bx-archive-in"></i>
                 </span>
               </div>
-              <h5 class="font-size-14 mb-0">Produtos Ativos</h5>
+              <h5 class="font-size-14 mb-0">Clientes</h5>
             </div>
             <div class="text-muted mt-4">
-              <h4>$ 28,452 <i class="mdi mdi-chevron-up ml-1 text-success"></i></h4>
-              <div class="d-flex">
-                <span class="badge badge-soft-success font-size-12"> + 0.2% </span> <span class="ml-2 text-truncate">From previous period</span>
-              </div>
+              <h4 style="text-align: center;"><%=@cliente%></h4>              
             </div>
           </div>
         </div>
@@ -70,13 +61,11 @@
                   <i class="bx bx-purchase-tag-alt"></i>
                 </span>
               </div>
-              <h5 class="font-size-14 mb-0">Pedidos em Aberto</h5>
+              <h5 class="font-size-14 mb-0">Produtos(Cardápio)</h5>
             </div>
             <div class="text-muted mt-4">
-              <h4>$ 16.2 <i class="mdi mdi-chevron-up ml-1 text-success"></i></h4>
-              <div class="d-flex">
-                <span class="badge badge-soft-warning font-size-12"> 0% </span> <span class="ml-2 text-truncate">From previous period</span>
-              </div>
+              <h4 style="text-align: center;"><%=@cardapio%></h4>
+              
             </div>
           </div>
         </div>
@@ -85,50 +74,7 @@
     <!-- end row -->
   </div>
 </div>
-<div class="row">
-  <div class="col-xl-8">
-    <div class="card">
-      <div class="card-body">
-        <div class="clearfix">
-          <div class="float-right">
-            <div class="input-group input-group-sm">
-              <select class="custom-select custom-select-sm">
-                <option selected>Jan</option>
-                <option value="1">Dec</option>
-                <option value="2">Nov</option>
-                <option value="3">Oct</option>
-              </select>
-              <div class="input-group-append">
-                <label class="input-group-text">Month</label>
-              </div>
-            </div>
-          </div>
-          <h4 class="card-title mb-4">Earning</h4>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="text-muted">
-              <div class="mb-4">
-                <p>This month</p>
-                <h4>$2453.35</h4>
-                <div><span class="badge badge-soft-success font-size-12 mr-1"> + 0.2% </span> From previous period</div>
-              </div>
-              <div>
-                <a href="#" class="btn btn-primary waves-effect waves-light btn-sm">View Details <i class="mdi mdi-chevron-right ml-1"></i></a>
-              </div>
-              <div class="mt-4">
-                <p class="mb-2">Last month</p>
-                <h5>$2281.04</h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-8">
-            <div id="line-chart" class="apex-charts" dir="ltr"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="row">  
   <div class="col-xl-4">
     <div class="card">
       <div class="card-body">
@@ -139,15 +85,18 @@
         <div class="text-center text-muted">
           <%= form_with(url: 'admin/consulta_pedido',method: :get) do |form|%>
             <div class="col-sm-12">
-                <label>Nº do Pedido</label>
+                <label>Nº do Pedido</label><br>
+                
                 <input type="text" class="form-control" name="ordem_pedido"/>
             </div>
+            
 
             <br>
             <div class="col-sm-12">
                 <%=form.submit "SALVAR", class: 'btn btn-primary btn-block'%>
             </div>
           <%end%>
+          <label id="statusPedido">Status: <label>
         </div>
       </div>
     </div>
