@@ -463,6 +463,12 @@
                     $('#notificaPedido').html(` <span class="badge badge-danger badge-pill" id="notificaPedido" style="position: fixed;">${data}</span>`);
                 });
             }, 10000);
+            setInterval(() => {
+                $.get( "/notifica_pedido/<%=$empresa%>", function( data ) {                        
+                    $('#notificaPedido').html(` <span class="badge badge-danger badge-pill" id="notificaPedido" style="position: fixed;">${data}</span>`);
+                 });
+
+            }, 10000);
 
             
            
