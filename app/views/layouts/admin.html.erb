@@ -93,7 +93,7 @@
                                 <span class="" id="notificaPedido" style="position: fixed;"></span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
-                                aria-labelledby="page-header-notifications-dropdown">
+                                aria-labelledby="page-header-notifications-dropdown" style="width: 1100%;">
                                 <div class="p-3">
                                     <div class="row align-items-center">
                                         <div class="col">
@@ -112,11 +112,18 @@
                                                             <i class="bx bx-cart"></i>
                                                         </span>
                                                     </div>
-                                                    <div class="media-body">
-                                                        <h6 class="mt-0 mb-1">#<%= pedido[:numero] %></h6>
-                                                        <div class="font-size-12 text-muted">
-                                                            <p class="mb-1">If several languages coalesce the grammar</p>
-                                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
+                                                    <div class="media-body">                                                        
+                                                        <div class="row" style="width:300px ;">
+                                                            <div class="col-sm-6" style="width: 150px;">
+                                                                <h6 class="mt-0 mb-1">#<%= pedido[:numero] %></h6>
+                                                            </div>
+                                                            <div class="col-sm-6" style="width: 200px;">
+                                                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                                                
+                                                                    <%= link_to 'Aceitar', "/admin/pedidos/1/?pedido=#{pedido[:id]}", method: :PATCH, class: 'btn btn-success'%>  
+                                                                    <button type="button" class="btn btn-info" onclick="vizualizaPedido()">Vizualisar</button>                                                                
+                                                                    <%= link_to 'Aceitar', "/admin/pedidos/1/?pedido=#{pedido[:id]}", method: :PATCH, class: 'btn btn-danger'%>                                                                 </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -261,7 +268,7 @@
                                         <div class="dropdown-menu" aria-labelledby="topnav-pages">
 
                                             <a href="#" class="dropdown-item">Cozinha</a>
-                                            <a href="#" class="dropdown-item">Pedidos</a>
+                                            <a href="/admin/pedidos" class="dropdown-item">Pedidos</a>
                                             <a href="#" class="dropdown-item">Avaliações</a>                                                                                      
                                         </div>
                                     </li>
@@ -456,21 +463,14 @@
         <!-- Fim do Modal Whats -->
         <%= javascript_include_tag 'admin'%>
 
-        <script>
-            
-            setInterval(() => {
-                $( "#notificacao_pedido" ).load( "/notifica_pedido/<%=$empresa%>", function(data) {
-                    $('#notificaPedido').html(` <span class="badge badge-danger badge-pill" id="notificaPedido" style="position: fixed;">${data}</span>`);
-                });
-            }, 10000);
+        <script>          
+           
             setInterval(() => {
                 $.get( "/notifica_pedido/<%=$empresa%>", function( data ) {                        
                     $('#notificaPedido').html(` <span class="badge badge-danger badge-pill" id="notificaPedido" style="position: fixed;">${data}</span>`);
                  });
 
-            }, 10000);
-
-            
+            }, 10000);            
            
         </script>
         
@@ -500,6 +500,31 @@
             
                 $('.money').mask('#.##0,00', {reverse: true});
         
+        </script>
+        <script>
+        function aceitaPedido(numeroPedido){
+            $.ajax({
+                url: `/admin/pedidos/1/?pedido=${numeroPedido}`,
+                type: 'PUT',
+                success: function(response) {
+                console.log('Pedido Aceito');
+                }
+            });
+        }
+        function recusaPedido(numeroPedido){
+            console.log('teste');
+            $.ajax({
+                url: `/admin/pedidos/2/?pedido=${numeroPedido}`,
+                type: 'PUT',
+                success: function(response) {
+                console.log('Pedido Recusado');
+                }
+            });
+        }
+
+        function vizualizaPedido(){
+
+        }
         </script>
     </body>
 </html>

@@ -7,17 +7,14 @@ class NotificationController < ApplicationController
     render :json => pedidos.count   
     $pedidos_pendentes = []
     pedidos.each do |pedido|
+      
       data = {
-        'numero': "#{pedido.numero}"        
+        'numero': "#{pedido.numero}" ,
+         'id': pedido.id     
       }
       $pedidos_pendentes.push(data)
     end   
     puts $pedidos_pendentes
   end
 
-  def atualiza_pedido
-    debugger
-
-    x = 1
-  end
 end

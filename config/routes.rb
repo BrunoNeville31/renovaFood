@@ -1,6 +1,7 @@
 Rails.application.routes.draw do  
   
   
+  
   get 'notification/index'
 post '/bot/auth', to: 'bot/start#auth'
 get '/bot/init', to: 'bot/start#init'
@@ -38,6 +39,7 @@ get '/notifica_pedido/:id', to: 'notification#index'
     get '/taxa_entrega', to: 'company#taxa_entrega'
     get '/consulta_pedido', to: 'company#consulta_pedido'
     get '/atualizaStatus', to: 'company#atualiza_pedido'
+    resources :pedidos, only:[:edit, :update, :index]
   end
 
   devise_for :users, controllers: {

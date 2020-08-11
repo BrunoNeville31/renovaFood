@@ -1,0 +1,105 @@
+<div class="row col-sm-12">
+    <div class="avatar-sm mr-3 mx-lg-auto mb-4 float-left float-lg-none">
+        <label>Pendente</label>
+        <span class="avatar-title rounded-circle bg-soft-warning text-primary font-size-16"></span>
+    </div>
+    <div class="avatar-sm mr-3 mx-lg-auto mb-4 float-left float-lg-none">
+        <label>Aceito</label>
+        <span class="avatar-title rounded-circle bg-soft-success text-primary font-size-16"></span>
+    </div>
+    <div class="avatar-sm mr-3 mx-lg-auto mb-4 float-left float-lg-none">
+        <label>Recusado</label>
+        <span class="avatar-title rounded-circle bg-soft-danger text-primary font-size-16"></span>
+    </div>
+    <div class="avatar-sm mr-3 mx-lg-auto mb-4 float-left float-lg-none">
+        <label>Preparação</label>
+        <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-16"></span>
+    </div>
+    <div class="avatar-sm mr-3 mx-lg-auto mb-4 float-left float-lg-none">
+        <label>Entrega</label>
+        <span class="avatar-title rounded-circle bg-soft-info text-primary font-size-16"></span>
+    </div>
+    <div class="avatar-sm mr-3 mx-lg-auto mb-4 float-left float-lg-none">
+        <label>Concluido</label>
+        <span class="avatar-title rounded-circle bg-soft-success text-primary font-size-16"></span>
+    </div>
+
+</div>
+<div class="row" style="margin-top: 40px;">
+    <% @pedidos.each do |pedido|%>        
+            <div class="col-xl-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="text-lg-center">
+                                    <div class="avatar-sm mr-3 mx-lg-auto mb-4 float-left float-lg-none">
+                                        <%if pedido.status == "pendente"%>
+                                            <span class="avatar-title rounded-circle bg-soft-warning text-primary font-size-16"></span>
+                                        <% elsif pedido.status == "aceito"%>
+                                            <span class="avatar-title rounded-circle bg-soft-info text-primary font-size-16"></span>
+                                        <% elsif pedido.status == "recusado"%>
+                                            <span class="avatar-title rounded-circle bg-soft-danger text-primary font-size-16"></span>
+                                        <% elsif pedido.status == "preparacao"%>
+                                            <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-16"></span>
+                                        <% elsif pedido.status == "entrega"%>
+                                            <span class="avatar-title rounded-circle bg-soft-info text-primary font-size-16"></span>
+                                        <% elsif pedido.status == "concluido"%>                                        
+                                            <span class="avatar-title rounded-circle bg-soft-success text-primary font-size-16"></span>
+                                        <%end%>
+                                         
+                                    </div>
+                                    <% cliente=  Client.find(pedido.client_id)%>
+                                    <h5 class="mb-1 font-size-15 text-truncate"><%= cliente.numero%></h5>
+                                    <a href="#" class="text-muted"><%=cliente.nome%></a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-8">
+                                <div>
+                                    <a href="invoices-detail.html" class="d-block text-primary mb-2">#<%= pedido.numero%></a>
+                                    <div class="row">
+                                        <div class="col-sm-6" style="padding: 10px;">
+                                            <button type="button" class="btn btn-dark waves-effect waves-light">Imprimir</button>
+                                        </div>
+                                        <div class="col-sm-6" style="padding: 10px;">
+                                            <select name="status_pedido" class="form-control" onchange="alteraStatus(this.value, <%=pedido.id%>)">
+                                                <option value="0" <%= pedido.status == "pendente" ? 'active' : ''%>>Pendente</option>
+                                                <option value="1" <%= pedido.status == "aceito" ? 'active' : ''%>>Aceito</option>
+                                                <option value="2" <%= pedido.status == "recusado" ? 'active' : ''%>>Recusado</option>
+                                                <option value="3" <%= pedido.status == "preparacao" ? 'active' : ''%>>Preparação</option>
+                                                <option value="4" <%= pedido.status == "entrega" ? 'active' : ''%>>Entrega</option>
+                                                <option value="5" <%= pedido.status == "concluido" ? 'active' : ''%>>Concluido</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item mr-3">
+                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Valor"><i class="bx bx-money mr-1 text-primary"></i><%= number_to_currency(pedido.valor_total, :unit => 'R$ ')%></h5>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Data do Pedido"><i class="bx bx-calendar mr-1 text-primary"></i> <%= pedido.created_at.to_time.strftime('%d/%m/%Y - %H:%M')%></h5>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>        
+    <%end%>
+</div>
+
+<script>
+    function alteraStatus(valor, pedido){
+        
+        $.ajax({
+            url: `/admin/pedidos/${valor}/?pedido=${pedido}`,
+            type: 'PUT',
+            success: function(response) {
+               console.log('deu certo');
+            }
+        });
+    }
+</script>
