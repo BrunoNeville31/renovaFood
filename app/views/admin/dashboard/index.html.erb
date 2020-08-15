@@ -74,31 +74,31 @@
     <!-- end row -->
   </div>
 </div>
-<div class="row">  
-  <div class="col-xl-4">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title mb-4">Consultar Pedido</h4>
-        <div>
-          <div id="donut-chart" class="apex-charts"></div>
-        </div>
-        <div class="text-center text-muted">
-          <%= form_with(url: 'admin/consulta_pedido',method: :get) do |form|%>
-            <div class="col-sm-12">
-                <label>Nº do Pedido</label><br>
+<!--<div class="row">  
+      <div class="col-xl-4">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title mb-4">Consultar Pedido</h4>
+            <div>
+              <div id="donut-chart" class="apex-charts"></div>
+            </div>
+            <div class="text-center text-muted">
+              <%= form_with(url: 'admin/consulta_pedido',method: :get) do |form|%>
+                <div class="col-sm-12">
+                    <label>Nº do Pedido</label><br>
+                    
+                    <input type="text" class="form-control" name="ordem_pedido"/>
+                </div>
                 
-                <input type="text" class="form-control" name="ordem_pedido"/>
-            </div>
-            
 
-            <br>
-            <div class="col-sm-12">
-                <%=form.submit "SALVAR", class: 'btn btn-primary btn-block'%>
+                <br>
+                <div class="col-sm-12">
+                    <%=form.submit "SALVAR", class: 'btn btn-primary btn-block'%>
+                </div>
+              <%end%>
+              <label id="statusPedido">Status: <label>
             </div>
-          <%end%>
-          <label id="statusPedido">Status: <label>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+    </div> -->
