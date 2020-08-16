@@ -40,6 +40,7 @@ get '/notifica_pedido/:id', to: 'notification#index'
     get '/consulta_pedido', to: 'company#consulta_pedido'
     get '/atualizaStatus', to: 'company#atualiza_pedido'
     resources :pedidos, only:[:edit, :update, :index]
+    get '/imprimir/teste', to: 'company#impressao'
   end
 
   devise_for :users, controllers: {
