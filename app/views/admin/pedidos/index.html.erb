@@ -49,6 +49,7 @@
                                     <th>Hora do Pedido</th>
                                     <th>Número</th>
                                     <th>Valor</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,6 +80,7 @@
                                         <td><%= pedido.created_at.to_time.strftime('%d/%m/%Y - %H:%M')%></td>
                                         <td><%= cliente.numero%></td>
                                         <td><%= number_to_currency(pedido.valor_total, :unit => 'R$ ')%></td>
+                                        <td style="width: 10px;"><%= link_to 'Imprimir', admin_path(pedido), class: 'btn btn-info'%></td>
                                     </tr>
                                 <% end %>                                
                             </tbody>

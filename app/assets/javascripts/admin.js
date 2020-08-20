@@ -12,3 +12,7 @@
 //
 //= require rails-ujs
 //= require activestorage
+
+function imprimir(){
+    window.print('teste');
+  }

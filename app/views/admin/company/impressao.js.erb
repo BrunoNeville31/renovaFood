@@ -1,0 +1,19 @@
+<%  
+    debugger
+    x = 1 
+%>
+
+<%= 
+    require 'escper'
+    vp1 = Escper::VendorPrinter.new :id => 1, :name => 'Printer 1 USB', :path => 'COM1', :copies => 1
+    print_engine = Escper::Printer.new 'local', [vp1]
+    print_engine.open
+    print_engine.print 1, 'print text to printer 1'
+    print_engine.close  
+%>
+    
+<%  
+    debugger
+    x = 1 
+%>
+    alert('olá');

@@ -3,12 +3,8 @@ class Admin::CompanyController < AdminController
   def index
   end
 
-  def impressao
-    require 'escper'
-    vp1 = Escper::VendorPrinter.new :id => 1, :name => 'Printer 1 USB', :path => '/USB001', :copies => 1
-    print_engine = Escper::Printer.new 'local', [vp1]
-    print_engine.print 1, 'print text to printer 1'
-    print_engine.close
+  def impressao    
+   
   end
 
   def new

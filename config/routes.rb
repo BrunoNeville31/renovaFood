@@ -1,8 +1,7 @@
 Rails.application.routes.draw do  
   
-  
-  
-  get 'notification/index'
+ 
+get 'notification/index'
 post '/bot/auth', to: 'bot/start#auth'
 get '/bot/init', to: 'bot/start#init'
 post '/bot/conversation', to: 'bot/start#conversation'
@@ -28,6 +27,7 @@ get '/notifica_pedido/:id', to: 'notification#index'
 
   namespace :admin do
     root 'dashboard#index'
+    get '/impressao/:id', to: 'printer#index'
     resources :delivery
     resources :client
     resources :product

@@ -35,6 +35,12 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap4'
 gem 'material_icons'
 gem 'money-rails', '~>1.12'
+gem 'escper'
+
+gem 'escpos'
+
+# see https://github.com/escpos/escpos-image
+gem 'escpos-image' # add this if you want to print images
 
 #######
 
